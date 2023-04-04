@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+src/py/.idea/misc.xml
+src/py/.idea/workspace.xml
+src/py/user/Testing.py
