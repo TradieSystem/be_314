@@ -2,6 +2,7 @@ import json
 import unittest
 
 from service.Request import Request
+from service.Request_Bid import Request_Bid
 from util.handling.Result_Handler import Result_Handler
 from util.packager.Encoder import Encoder
 
@@ -23,6 +24,9 @@ class MyTestCase(unittest.TestCase):
 
     def test_get_request_postcode(self):
         print(Request.get_by_postcode(2570))
+
+    def test_request_bid(self):
+        print(Request_Bid.get_request_bid(6))
 
 
 if __name__ == '__main__':

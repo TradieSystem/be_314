@@ -62,7 +62,7 @@ class Bid_Status:
         if database.status is not DatabaseStatus.Connected:
             database.connect()
 
-        else:
+        elif database.status is DatabaseStatus.NoImplemented:
             raise DatabaseError(status_code='500', table=None, query=None, database_object=None,
                                 message='Could not connect to Database')
 

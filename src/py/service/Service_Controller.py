@@ -49,6 +49,14 @@ class Service_Controller:
         elif self.__context.get('resource-path') == '/serviceRequest/available':
             return self.professional_get_available_request()
 
+        elif self.__context.get('resource-path') == '/serviceRequest/application':
+            # differs based on method passed
+            if self.__context.get('http-method') == 'POST':
+                return self.professional_create_application()
+
+            elif self.__context.get('http-method') == 'PUT':
+                return "application GET method passed"
+
     def client_create_request(self):
         # parse body
         json_body = self.__event.get('body-json')
@@ -111,3 +119,19 @@ class Service_Controller:
         requests = Request.get_by_postcode(self.__context.get('postcode'))
 
         return Result_Handler.no_status_code(requests)
+
+    def professional_create_application(self):
+        json_body = self.__event.get('body-json')
+        request_bid = Decoder(json.dumps(json_body)).deserialize()
+
+        # try to create request bid
+        try:
+            new_request_bid = request_bid.create_bid()
+
+        except DatabaseObjectAlreadyExists as doae:
+            return doae.generate_api_error()
+
+        except FailedToCreateDatabaseObject as fcdo:
+            return fcdo.generate_api_error()
+
+        return Result_Handler.no_status_code(request_bid)

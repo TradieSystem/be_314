@@ -3,13 +3,19 @@ py that holds all details regarding Offer
 """
 from datetime import datetime
 from dataclasses import dataclass
+from decimal import Decimal
+
+from mysql.connector import errors
 
 from service.Bid_Status import Bid_Status
 from user.Professional import Professional
+from user.User import User
 from util.database.Database import Database
 from util.database.DatabaseLookups import DatabaseLookups
 from util.database.DatabaseStatus import DatabaseStatus
 from util.handling.errors.database.DatabaseConnectionError import DatabaseConnectionError
+from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
+from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
 from util.handling.errors.database.NoDatabaseObjectFound import NoDatabaseObjectFound
 
 
@@ -18,17 +24,92 @@ class Request_Bid:
     request_bid_id: int = None
     request_id: int = None
     professional_id: int = None
-    amount: float = None
+    amount: Decimal = None
     sent_date: datetime = None
     accepted_by_client_date: datetime = None
     professional_cancelled_date: datetime = None
     bid_status_id: int = None
 
-    def create_offer(self):
-        pass
+    def create_bid(self):
+        database = Database.database_handler(DatabaseLookups.User)  # create database connection
 
-    def update_offer(self):
-        pass
+        # check if database is connected, if not connect
+        if database.status is DatabaseStatus.Disconnected:
+            database.connect()
+
+        elif database.status is DatabaseStatus.NoImplemented:
+            raise DatabaseConnectionError(table='request', query=None, database_object=None)
+
+        # construct query for creation
+        database.insert(self, 'request_bid', ('request_bid_id', 'accepted_by_client_date',
+                                              'professional_cancelled_date'))
+
+        # try to run query
+        try:
+            self.request_bid_id = database.run()
+            database.commit()
+
+        except errors.IntegrityError as ie:  # in case that change violates consistency constraints
+            # clean up instance and rollback to remove lock
+            database.rollback()
+            query = database.review_query()
+            database.clear()
+            database.disconnect()
+
+            # if there is an integrity error
+            if ie.errno == 1452:  # cannot solve gracefully
+                # raise error
+                raise DatabaseObjectAlreadyExists(table='request_bid', query=query, database_object=self)
+
+            # some other consistency constraint check
+            raise FailedToCreateDatabaseObject(table='request_bid', query=query, database_object=self)
+
+        # clear database tool
+        database.clear()
+        database.disconnect()
+
+        return Request_Bid.get_request_bid(self.request_bid_id)
+
+    def update_bid(self):
+        database = Database.database_handler(DatabaseLookups.User)  # create database connection
+
+        # check if database is connected, if not connect
+        if database.status is DatabaseStatus.Disconnected:
+            database.connect()
+
+        elif database.status is DatabaseStatus.NoImplemented:
+            raise DatabaseConnectionError(table='request', query=None, database_object=None)
+
+        # construct query for creation
+        database.update(self, 'request_bid', ('request_bid_id', 'accepted_by_client_date',
+                                              'professional_cancelled_date'))
+        database.where('request_bid_id = %s', self.request_bid_id)
+
+        # try to run query
+        try:
+            self.request_bid_id = database.run()
+            database.commit()
+
+        except errors.IntegrityError as ie:  # in case that change violates consistency constraints
+            # clean up instance and rollback to remove lock
+            database.rollback()
+            query = database.review_query()
+            database.clear()
+            database.disconnect()
+
+            # if there is an integrity error
+            if ie.errno == 1452:  # cannot solve gracefully
+                # raise error
+                raise DatabaseObjectAlreadyExists(table='request_bid', query=query, database_object=self)
+
+            # some other consistency constraint check
+            raise FailedToCreateDatabaseObject(table='request_bid', query=query, database_object=self)
+
+        # clear database tool
+        database.clear()
+        database.disconnect()
+
+        return Request_Bid.get_by_request_id(self.request_bid_id)
 
     @staticmethod
     def get_request_bid(request_bid_id: int) -> 'Request_Bid':
@@ -43,19 +124,16 @@ class Request_Bid:
             raise DatabaseConnectionError(table='request', query=None, database_object=None)
 
         # create query for database connection
-        database.select(('request_bid_id', 'request_id', 'professional_id', 'amount', 'sent_date', 'bid_status_id',
-                         'request_status_id'), 'request')
+        database.select(('request_bid_id', 'request_id', 'professional_id', 'amount', 'sent_date', 'bid_status_id'),
+                        'request_bid')
         database.where('request_bid_id = %s', request_bid_id)
 
         # try to run query
         result = database.run()
 
-        # if nothing is found return error
+        # if nothing is found return None
         if len(result) == 0:
-            query = database.review_query()
-            database.clear()
-            database.disconnect()
-            raise NoDatabaseObjectFound(table='request_bid', query=query, database_object=None)
+            return None
 
         # parse into request object
         request_bid = Request_Bid(request_bid_id=result[0][0], request_id=result[0][1], professional_id=result[0][2],
@@ -100,9 +178,9 @@ class Request_Bid:
             remap = {
                 "applicationID": obj.request_bid_id,
                 "requestID": obj.request_id,
-                "offerDate": obj.sent_date,
-                "userID": Professional.get_by_professional_id(obj.professional_id).user_id,
-                "cost": obj.amount
+                "offerDate": obj.sent_date.strftime('%m/%d/%Y') if obj.sent_date is not None else None,
+                "professionalID": Professional.get_by_professional_id(obj.professional_id).user_id if obj.professional_id is not None else None,
+                "cost": obj.amount.__str__()
             }
 
             return remap
@@ -112,16 +190,17 @@ class Request_Bid:
     @staticmethod
     def FromAPI(obj):
         # convert user_id for professional to professional_id
-        print(obj.get('professionalID'))
-        professional_id = Professional.get_professional(obj.get('professionalID')).professional_id
+        professional_id = User.get_user(obj.get('professionalID')).professional.professional_id
 
         # get bid status id
         if obj.get('applicationStatus') is not None:
             bid_status_id = Bid_Status.get_by_status_name(obj.get('applicationStatus')).bid_status_id
-
         else:
             bid_status_id = None
 
+        # convert date
+        sent_date = datetime.strptime(obj.get('offerDate'), '%m/%d/%Y')
+
         # create object
-        return Request_Bid(request_id=obj.get('requestID'), sent_date=obj.get('requestDate'),
+        return Request_Bid(request_id=obj.get('requestID'), sent_date=sent_date,
                            professional_id=professional_id, amount=obj.get('cost'), bid_status_id=bid_status_id)
