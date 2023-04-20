@@ -31,7 +31,8 @@ class MyTestCase(unittest.TestCase):
         print(Request.get_by_postcode(2570))
 
     def test_request_bid(self):
-        print(Request_Bid.get_request_bid(6))
+        request_bid = Request_Bid.get_request_bid(6)
+        print(Request_Bid.ToAPI(request_bid))
 
 
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ class Bid_Status:
         if database.status is not DatabaseStatus.Connected:
             database.connect()
 
-        else:
+        elif database.status is DatabaseStatus.NoImplemented:
             raise DatabaseError(status_code='500', table=None, query=None, database_object=None,
                                 message='Could not connect to Database')
 
@@ -49,7 +49,7 @@ class Bid_Status:
             query = database.review_query()
             database.clear()
             database.disconnect()
-            raise NoDatabaseObjectFound(status_code='500', table='bid_status', query=query, database_object=None)
+            raise NoDatabaseObjectFound(table='bid_status', query=query, database_object=None)
 
         return Bid_Status(bid_status_id=result[0][0], status_name=result[0][1])
 

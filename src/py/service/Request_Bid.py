@@ -87,7 +87,7 @@ class Request_Bid:
 
         # try to run query
         try:
-            self.request_bid_id = database.run()
+            database.run()
             database.commit()
 
         except errors.IntegrityError as ie:  # in case that change violates consistency constraints
@@ -109,7 +109,7 @@ class Request_Bid:
         database.clear()
         database.disconnect()
 
-        return Request_Bid.get_by_request_id(self.request_bid_id)
+        return Request_Bid.get_request_bid(self.request_bid_id)
 
     @staticmethod
     def get_request_bid(request_bid_id: int) -> 'Request_Bid':
@@ -180,6 +180,7 @@ class Request_Bid:
                 "requestID": obj.request_id,
                 "offerDate": obj.sent_date.strftime('%m/%d/%Y') if obj.sent_date is not None else None,
                 "professionalID": Professional.get_by_professional_id(obj.professional_id).user_id if obj.professional_id is not None else None,
+                "applicationStatus": Bid_Status.get_by_status_id(obj.bid_status_id).status_name if obj.bid_status_id is not None else None,
                 "cost": obj.amount.__str__()
             }
 
@@ -190,7 +191,7 @@ class Request_Bid:
     @staticmethod
     def FromAPI(obj):
         # convert user_id for professional to professional_id
-        professional_id = User.get_user(obj.get('professionalID')).professional.professional_id
+        professional_id = User.get_user(obj.get('professionalID')).professional.professional_id if obj.get('professionalID') is not None else None
 
         # get bid status id
         if obj.get('applicationStatus') is not None:
@@ -199,8 +200,8 @@ class Request_Bid:
             bid_status_id = None
 
         # convert date
-        sent_date = datetime.strptime(obj.get('offerDate'), '%m/%d/%Y')
+        sent_date = datetime.strptime(obj.get('offerDate'), '%m/%d/%Y') if obj.get('offerDate') is not None else None
 
         # create object
-        return Request_Bid(request_id=obj.get('requestID'), sent_date=sent_date,
+        return Request_Bid(request_bid_id=obj.get('applicationID'), request_id=obj.get('requestID'), sent_date=sent_date,
                            professional_id=professional_id, amount=obj.get('cost'), bid_status_id=bid_status_id)
