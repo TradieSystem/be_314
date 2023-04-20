@@ -8,12 +8,14 @@ from decimal import Decimal
 from mysql.connector import errors
 
 from service.Bid_Status import Bid_Status
+import service.Request
 from user.Professional import Professional
 from user.User import User
 from util.database.Database import Database
 from util.database.DatabaseLookups import DatabaseLookups
 from util.database.DatabaseStatus import DatabaseStatus
 from util.handling.errors.database.DatabaseConnectionError import DatabaseConnectionError
+from util.handling.errors.database.DatabaseError import DatabaseError
 from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
 from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
 from util.handling.errors.database.NoDatabaseObjectFound import NoDatabaseObjectFound
@@ -105,11 +107,61 @@ class Request_Bid:
             # some other consistency constraint check
             raise FailedToCreateDatabaseObject(table='request_bid', query=query, database_object=self)
 
-        # clear database tool
-        database.clear()
-        database.disconnect()
+        # get status id to check if bid as been approved
+        bid_status = Bid_Status.get_by_status_id(self.bid_status_id)
+
+        # if bid_status is approved set the professional_id in the request
+        if bid_status.status_name == 'Approved':
+            request_bid = Request_Bid.get_request_bid(self.request_bid_id)  # get full request_bid
+            request = service.Request.Request.get_request(request_bid.request_id)  # get full request
+            request.professional_id = request_bid.professional_id  # set professional_id
+            request.update_request()  # update request
+
+            # set all bids to declined
+            request_bid.decline_bid_request()
 
         return Request_Bid.get_request_bid(self.request_bid_id)
+
+    # decline all bid_requests once approved
+    def decline_bid_request(self) -> None:
+        # create database session
+        database = Database.database_handler(DatabaseLookups.User)
+
+        # check if database is connected, if not connect
+        if database.status is DatabaseStatus.Disconnected:
+            database.connect()
+
+        elif database.status is DatabaseStatus.NoImplemented:
+            raise DatabaseConnectionError(table='request', query=None, database_object=None)
+
+        # get bid_status
+        bid_status = Bid_Status.get_by_status_name('Declined')
+
+        # update all the bid_statuses
+        dummy_bid_request = Request_Bid(request_id=self.request_id, bid_status_id=bid_status.bid_status_id)
+
+        # update all other bid_status to declined
+        database.update(dummy_bid_request, 'request_bid', ('request_id', 'accepted_by_client_date',
+                                                           'professional_cancelled_date'))
+        database.where('request_id = %s', self.request_id)
+        database.ampersand('request_bid_id != %s', self.request_bid_id)
+
+        # try to update bids
+        try:
+            database.run()
+            database.commit()
+
+        except Exception as e:
+            database.rollback()
+            query = database.review_query()
+            database.clear()
+            database.disconnect()
+
+            raise DatabaseError(table='request_bid', query=query, database_object=self)
+
+        # clean up session
+        database.clear()
+        database.disconnect()
 
     @staticmethod
     def get_request_bid(request_bid_id: int) -> 'Request_Bid':
@@ -136,10 +188,10 @@ class Request_Bid:
             return None
 
         # parse into request object
-        request_bid = Request_Bid(request_bid_id=result[0][0], request_id=result[0][1], professional_id=result[0][2],
+        return Request_Bid(request_bid_id=result[0][0], request_id=result[0][1], professional_id=result[0][2],
                                   amount=result[0][3], sent_date=result[0][4], bid_status_id=result[0][5])
 
-        return request_bid
+
 
     @staticmethod
     def get_by_request_id(request_id: int) -> ['Request_Bid']:
