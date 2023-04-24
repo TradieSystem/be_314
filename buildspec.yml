@@ -15,5 +15,6 @@ phases:
       - echo "Updating csit314-staging-serviceController..."      
       - aws lambda update-function-code --function-name Service_Controller --zip-file fileb://src_build.zip
       - echo "Updating csit314-staging-securityController..."      
-      - aws lambda update-function-code --function-name User_Controller --zip-file fileb://src_build.zip            
+      - aws lambda update-function-code --function-name User_Controller --zip-file fileb://src_build.zip
+      - echo "All Lambda functions updated to latest builds"       
         
