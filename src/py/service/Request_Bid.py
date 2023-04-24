@@ -115,6 +115,7 @@ class Request_Bid:
             request_bid = Request_Bid.get_request_bid(self.request_bid_id)  # get full request_bid
             request = service.Request.Request.get_request(request_bid.request_id)  # get full request
             request.professional_id = request_bid.professional_id  # set professional_id
+            request.request_status_id = 3  # request_status_id 3 = 'Pending Completion'
             request.update_request()  # update request
 
             # set all bids to declined
