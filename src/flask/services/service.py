@@ -1,4 +1,5 @@
 from flask import Blueprint
+from flask import request
 from constants.api_info import api_version
 
 
@@ -12,7 +13,7 @@ service_base = "serviceRequest"
 # routes
 @service_blueprint.get("/{}/{}".format(api_version, service_base))
 def serviceRequestGet():
-    return "Get Service Request"
+    return request.json
 
 
 @service_blueprint.post("/{}/{}".format(api_version, service_base))

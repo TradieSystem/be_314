@@ -35,6 +35,7 @@ database_process = Popen("docker run -p 3306:3306 --name {} {}{}".format(docker_
 # wait for shutdown command
 print("Please Type Shutdown code 'kill':")
 
+# simple wait for kill command
 while input("$ ") != "kill":
     continue
 
