@@ -49,7 +49,7 @@ class Database:
         # Creates a new socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-        # Try to connect to the given host and port
+        # Try to connect to local host on default port
         if sock.connect_ex(("127.0.0.1", 3306)) == 0:
             try:
                 database = Database('127.0.0.1', 'Project', 'root', 'ext50n123')

@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../flask/tools/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../flask/tools/request_construct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask/services/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/services/user_route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/util/database/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/util/database/Database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,6 +21,7 @@
       <list>
         <option value="Python Unit Test" />
         <option value="Python Script" />
+        <option value="Setup Script" />
       </list>
     </option>
   </component>
