@@ -12,7 +12,7 @@ docker_image_ver = ":0.1"
 docker_container_name = "csit314-mysql-container-{}".format(((datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000.0))
 database_dir = "./src/database"
 flask_dir = "./src/flask"
-join_script = "join.cmd"
+join_script = "join.sh"
 
 # move to join directory and ensure most up to date version of sql queries generated in all
 os.chdir(database_dir)
