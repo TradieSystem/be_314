@@ -14,12 +14,7 @@ database_dir = "./src/database"
 flask_dir = "./src/flask"
 join_script = "join.sh"
 
-# move to join directory and ensure most up to date version of sql queries generated in all
-os.chdir(database_dir)
-run([join_script])
-
-# move back to root and run docker build
-os.chdir("../..")
+# run docker build
 run("docker build -t {}{} .".format(docker_image_name, docker_image_ver))
 
 # move back to root and run docker start container
