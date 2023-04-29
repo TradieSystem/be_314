@@ -24,7 +24,7 @@ database_process = Popen(run_command, shell=True)
 
 # start flask
 chmod_command = "sudo chmod +x start_flask.sh"
-Popen(chmod_command, shell=True)
+Popen(chmod_command)
 
 flask_command = "start_flask.sh"
 flask_process = Popen(flask_command, shell=True)
