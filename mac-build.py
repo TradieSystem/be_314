@@ -23,7 +23,11 @@ run_command = 'docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.form
 database_process = Popen(run_command, shell=True)
 
 # start flask
-flask_process = Popen("start_flask.sh", shell=True)
+chmod_command = "sudo chmod +x start_flask"
+Popen(chmod_command, shell=True)
+
+flask_command = "start_flask.sh"
+flask_process = Popen(flask_command, shell=True)
 print
 
 # wait for shutdown command
