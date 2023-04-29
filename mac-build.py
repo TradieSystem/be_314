@@ -18,10 +18,10 @@ join_script = "join.sh"
 run("docker build -t {}{} .".format(docker_image_name, docker_image_ver))
 
 # move back to root and run docker start container
-database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), startupinfo=STDOUT, stdout=PIPE)
+database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), shell=True)
 
 # start flask
-flask_process = Popen("start_flask.sh", startupinfo=STDOUT, stdout=PIPE)
+flask_process = Popen("start_flask.sh", shell=True)
 print
 
 # wait for shutdown command
