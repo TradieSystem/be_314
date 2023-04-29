@@ -15,11 +15,12 @@ flask_dir = "./src/flask"
 join_script = "join.sh"
 
 # run docker build
-command = "docker build -t {}{} .".format(docker_image_name, docker_image_ver)
-Popen(command, shell=True)
+build_command = "docker build -t {}{} .".format(docker_image_name, docker_image_ver)
+Popen(build_command, shell=True)
 
 # move back to root and run docker start container
-database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), shell=True)
+run_command = 'docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver)
+database_process = Popen(run_command, shell=True)
 
 # start flask
 flask_process = Popen("start_flask.sh", shell=True)
