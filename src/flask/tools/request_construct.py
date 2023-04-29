@@ -13,9 +13,9 @@ class Request_Construct:
     def construct_request(request: Request):
         req = dict()  # create dictionary to return
         if request.data.decode('utf-8') != "":
-            req["json-body"] = request.json
+            req["body-json"] = request.json
         else:
-            req["json-body"] = None
+            req["body-json"] = None
 
         # create context and use logic to determine if additional parameters required
         context = {

@@ -15,36 +15,39 @@ user_base = "user"
 
 @user_blueprint.get("/{}".format(user_base))
 def userGet():
-    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
-    return user_controller
+    print(Request_Construct.construct_request(request))
+    result = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    if result is None:
+        return {}
+    else:
+        return result
 
 
 @user_blueprint.get("/{}/validate".format(user_base))
 def userValidate():
-    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
-    return user_controller
+    result = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
 
 
 @user_blueprint.get("/{}/login".format(user_base))
 def userLogin():
-    security_controller = Security_Controller.Event_Start(Request_Construct.construct_request(request))
-    return security_controller
+    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
 
 
 @user_blueprint.get("/{}/resetPassword".format(user_base))
 def userResetPassword():
-    security_controller = Security_Controller.Event_Start(Request_Construct.construct_request(request))
-    return security_controller
+    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
 
 
 @user_blueprint.post("/{}/userCreate".format(user_base))
 def userCreate():
-    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
-    print("Result {}".format(user_controller))
-    return user_controller
+    result = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
 
 
 @user_blueprint.put("/{}/updateUser".format(user_base))
 def userUpdate():
-    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
-    return user_controller
+    result = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
