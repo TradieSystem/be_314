@@ -12,7 +12,10 @@ class Request_Construct:
     @staticmethod
     def construct_request(request: Request):
         req = dict()  # create dictionary to return
-        req["body-json"] = request.json  # add sent request
+        if request.data.decode('utf-8') != "":
+            req["json-body"] = request.json
+        else:
+            req["json-body"] = None
 
         # create context and use logic to determine if additional parameters required
         context = {
@@ -20,6 +23,7 @@ class Request_Construct:
             "http-method": request.method
         }
 
+        # transform query names
         for query in request.args:
             key = query
             if query == 'email':

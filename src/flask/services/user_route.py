@@ -3,6 +3,7 @@ from flask import request
 import json
 from tools.request_construct import Request_Construct
 from user.User_Controller import User_Controller
+from security.Security_Controller import Security_Controller
 
 
 # create user routes blueprint
@@ -14,17 +15,36 @@ user_base = "user"
 
 @user_blueprint.get("/{}".format(user_base))
 def userGet():
-    #user_controller = User_Controller.Event_Start(request.json)
-    print(request.path)
-    req = Request_Construct.construct_request(request)
-    return req
+    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return user_controller
+
+
+@user_blueprint.get("/{}/validate".format(user_base))
+def userValidate():
+    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return user_controller
+
+
+@user_blueprint.get("/{}/login".format(user_base))
+def userLogin():
+    security_controller = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return security_controller
+
+
+@user_blueprint.get("/{}/resetPassword".format(user_base))
+def userResetPassword():
+    security_controller = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return security_controller
 
 
 @user_blueprint.post("/{}/userCreate".format(user_base))
 def userCreate():
-    return "User Create"
+    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    print("Result {}".format(user_controller))
+    return user_controller
 
 
-@user_blueprint.put("/{}/userUpdate".format(user_base))
+@user_blueprint.put("/{}/updateUser".format(user_base))
 def userUpdate():
-    return "User Update"
+    user_controller = User_Controller.Event_Start(Request_Construct.construct_request(request))
+    return user_controller
