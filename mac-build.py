@@ -7,7 +7,7 @@ import os
 import datetime
 
 # static variables
-docker_image_name = "csit314-mysql-image"
+docker_image_name = "csit314"
 docker_image_ver = ":0.1"
 docker_container_name = "csit314-mysql-container-{}".format(((datetime.datetime.now() - datetime.datetime.utcfromtimestamp(0)).total_seconds() * 1000.0))
 database_dir = "./src/database"
