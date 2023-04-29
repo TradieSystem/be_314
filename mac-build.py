@@ -1,8 +1,8 @@
 """
-py that builds all required dependencies for backend local and starts services
+py that builds all required dependencies for backend local and starts services for mac (why would you use mac?)
 """
 
-from subprocess import Popen, run, CREATE_NEW_CONSOLE
+from subprocess import Popen, run, STDOUT, PIPE
 import os
 import datetime
 
@@ -23,17 +23,10 @@ os.chdir("../..")
 run("docker build -t {}{} .".format(docker_image_name, docker_image_ver))
 
 # move back to root and run docker start container
-database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), creationflags=CREATE_NEW_CONSOLE)
+database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), startupinfo=STDOUT, stdout=PIPE)
 
 # start flask
-"""
-run("start_flask.cmd")
-run("python -m pip install -r requirements.txt")
-run("python -m pip install -e ./../py")
-flask_process = Popen("python app.py", creationflags=CREATE_NEW_CONSOLE)
-"""
-print(os.getcwd())
-flask_process = Popen("start_flask.bat", creationflags=CREATE_NEW_CONSOLE)
+flask_process = Popen("start_flask.sh", startupinfo=STDOUT, stdout=PIPE)
 print
 
 # wait for shutdown command
