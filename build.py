@@ -22,6 +22,9 @@ run([join_script])
 os.chdir("../..")
 run("docker build -t {}{} .".format(docker_image_name, docker_image_ver))
 
+# move back to root and run docker start container
+database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), creationflags=CREATE_NEW_CONSOLE)
+
 # start flask
 """
 run("start_flask.cmd")
@@ -29,10 +32,9 @@ run("python -m pip install -r requirements.txt")
 run("python -m pip install -e ./../py")
 flask_process = Popen("python app.py", creationflags=CREATE_NEW_CONSOLE)
 """
-
-# move back to root and run docker start container
-os.chdir("../..")
-database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), creationflags=CREATE_NEW_CONSOLE)
+print(os.getcwd())
+flask_process = Popen("start_flask.bat", creationflags=CREATE_NEW_CONSOLE)
+print
 
 # wait for shutdown command
 print("Please Type Shutdown code 'kill':")
@@ -42,7 +44,7 @@ while input("$ ") != "kill":
     continue
 
 # terminate processes
-#Popen("TASKKILL /F /PID {} /T".format(flask_process.pid))
+Popen("TASKKILL /F /PID {} /T".format(flask_process.pid))
 
 # stop and delete docker container
 run("docker stop {}".format(docker_container_name))

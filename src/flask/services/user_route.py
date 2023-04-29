@@ -13,7 +13,7 @@ user_blueprint = Blueprint("user_blueprint", __name__)
 user_base = "user"
 
 
-@user_blueprint.get("/{}".format(user_base))
+@user_blueprint.get("/{}/userGet".format(user_base))
 def userGet():
     print(Request_Construct.construct_request(request))
     result = User_Controller.Event_Start(Request_Construct.construct_request(request))
