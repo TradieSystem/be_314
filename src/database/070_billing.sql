@@ -4,7 +4,7 @@ CREATE TABLE billing (
      user_id            MEDIUMINT NOT NULL,
      name               VARCHAR(100) NOT NULL,
      card_number        VARCHAR(256) NOT NULL,
-     expiry_date        DATE NOT NULL,
+     expiry_date        VARCHAR(20) NOT NULL,
      ccv                INT NOT NULL,
      billing_type_id    INT NOT NULL,       
      retired            DATE,

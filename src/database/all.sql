@@ -7,6 +7,12 @@
 -- From: 000_drop_all.sql 
 SET FOREIGN_KEY_CHECKS = 0;
 
+-- For Docker File
+CREATE DATABASE IF NOT EXISTS Project;
+COMMIT;
+USE Project;
+
+-- Original Normal Process
 DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS associated_service;
 DROP TABLE IF EXISTS authorisation;
@@ -117,7 +123,7 @@ CREATE TABLE billing (
      user_id            MEDIUMINT NOT NULL,
      name               VARCHAR(100) NOT NULL,
      card_number        VARCHAR(256) NOT NULL,
-     expiry_date        DATE NOT NULL,
+     expiry_date        VARCHAR(20) NOT NULL,
      ccv                INT NOT NULL,
      billing_type_id    INT NOT NULL,       
      retired            DATE,
@@ -132,7 +138,7 @@ CREATE UNIQUE INDEX uc_billing_user_id ON billing(user_id, billing_type_id, reti
 CREATE TABLE security_question (
      security_question_id  INT NOT NULL AUTO_INCREMENT,
      question              VARCHAR(2000) NOT NULL,
-     retired               DATETIME NOT NULL,
+     retired               DATETIME,
      PRIMARY KEY (security_question_id)
 );  
   

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Request.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Request.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Service_Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Service_Controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_packager.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_packager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_request.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_request.py" afterDir="false" />
-    </list>
+    <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +12,7 @@
       <list>
         <option value="Python Unit Test" />
         <option value="Python Script" />
+        <option value="Setup Script" />
       </list>
     </option>
   </component>
@@ -45,7 +40,7 @@
       <recent name="D:\Data\User Data\Documents\Documentation\Studies\University\CSIT314\Group Project\Repos\be_314\src\py\service" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_request.MyTestCase.test_update_request">
+  <component name="RunManager" selected="Python tests.Python tests for test_packager.TestPackager.test_request_packing">
     <configuration name="Python tests for test_packager.TestPackager.test_request_packing" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />

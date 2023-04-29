@@ -46,7 +46,7 @@ class User_Controller:
     def create_user(self) -> object:
         try:
             json_body = self.__event.get('body-json')
-            usr = Decoder(json.dumps(json_body), ).deserialize()
+            usr = Decoder(json.dumps(json_body)).deserialize()
             new_user = usr.create_user()
 
         except FailedToCreateDatabaseObject as fcdo:

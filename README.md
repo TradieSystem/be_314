@@ -62,6 +62,12 @@ Please use Python 3.9 as that is what is supported by AWS Lambda currently, if y
 <br/>
 <br/>
 
+# Running Locally
+If you wish to run the project locally, please navigate to the root directory of the repository in **cmd** and run the command __python build.py__. This will set up your docker instance with MySQL and start the flask instance at the same time.
+
+<br/>
+<br/>
+
 # Some Notes
 - Currently I am working on developing a dockerised version of the RDS MySQL instance along with the converting the Lambda and API Gateway into a Node.Js Express server for <br/>local testing, but this is not yet complete.
 - Currently in Amazon AWS the RDS is set to only accept inbound traffic from my own (Ben) IP, I am trying to work out a dynamic way of allowing user's IPs but we may either end up setting IPs statically in the VPC security group for selected database users or opening up traffic to all.
