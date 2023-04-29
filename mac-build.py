@@ -23,7 +23,7 @@ run_command = 'docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.form
 database_process = Popen(run_command, shell=True)
 
 # start flask
-chmod_command = "sudo chmod +x start_flask"
+chmod_command = "sudo chmod +x start_flask.sh"
 Popen(chmod_command, shell=True)
 
 flask_command = "start_flask.sh"
