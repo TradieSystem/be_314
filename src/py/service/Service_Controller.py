@@ -49,6 +49,9 @@ class Service_Controller:
         elif self.__context.get('resource-path') == '/serviceRequest/available':
             return self.professional_get_available_request()
 
+        elif self.__context.get('resource-path') == '/serviceRequest/review':
+            return self.create_review()
+
     def client_create_request(self):
         # parse body
         json_body = self.__event.get('body-json')
@@ -111,3 +114,7 @@ class Service_Controller:
         requests = Request.get_by_postcode(self.__context.get('postcode'))
 
         return Result_Handler.no_status_code(requests)
+
+    def create_review(self):
+        review = None
+        return Result_Handler.no_status_code({"statusCode": "200", "Test": "Testing"})
