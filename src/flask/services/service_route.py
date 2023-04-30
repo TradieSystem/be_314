@@ -56,8 +56,15 @@ def applicationUpdate():
     return result
 
 
+@service_blueprint.get("/{}/review".format(service_base))
+@cross_origin()
+def ReviewGet():
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
+
+
 @service_blueprint.post("/{}/review".format(service_base))
 @cross_origin()
-def createReview():
+def ReviewCreate():
     result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result

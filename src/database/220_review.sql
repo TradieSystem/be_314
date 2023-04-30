@@ -6,3 +6,5 @@ CREATE TABLE review (
     PRIMARY KEY (review_id),
     FOREIGN KEY (request_id) REFERENCES request(request_id)
 );
+
+CREATE UNIQUE INDEX uc_request_review_id ON review(review_id, request_id);

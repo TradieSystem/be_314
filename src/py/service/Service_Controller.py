@@ -50,7 +50,11 @@ class Service_Controller:
             return self.professional_get_available_request()
 
         elif self.__context.get('resource-path') == '/serviceRequest/review':
-            return self.create_review()
+            if self.__context.get('http-method') == 'GET':
+                return self.get_review()
+
+            elif self.__context.get('http-method') == 'POST':
+                return self.create_review()
 
     def client_create_request(self):
         # parse body

@@ -4,6 +4,8 @@ py that handles data for requests type
 from datetime import datetime
 from datetime import date
 from dataclasses import dataclass
+
+from service.Review import Review
 from service.Service import Service
 from user.Client import Client
 from user.Professional import Professional
@@ -35,6 +37,7 @@ class Request:
     service_id: int = None
     request_status_id: int = None
     request_bids: ['Request_Bid'] = None
+    review: Review = None
 
     def create_request(self):
         database = Database.database_handler(DatabaseLookups.User)  # create database connection
@@ -147,6 +150,9 @@ class Request:
 
         # get request_bids
         request.request_bids = Request_Bid.get_by_request_id(request.request_id)
+
+        # get review
+        request.review = Review.get_by_request(request.request_id)
 
         # clean up instance
         database.clear()
@@ -267,7 +273,8 @@ class Request:
                 "postcode": obj.postcode,
                 "clientID": client_id,
                 "professionalID": professional_id,
-                "applications": obj.request_bids if obj.request_bids is not None else None
+                "applications": obj.request_bids if obj.request_bids is not None else None,
+                "review": obj.review
             }
 
             return remap

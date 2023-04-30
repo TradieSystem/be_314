@@ -88,6 +88,33 @@ class Review:
         return review
 
     @staticmethod
+    def get_by_request(request_id: int):
+        # create database session
+        database = Database.database_handler(DatabaseLookups.User)
+
+        # check if session is connected
+        if database.status is not DatabaseStatus.Connected:
+            database.connect()
+
+        elif database.status is DatabaseStatus.NoImplemented:
+            raise DatabaseConnectionError(table='review', query=None, database_object=None)
+
+        # create query for database connection
+        database.select(('review_id', 'rating', 'comment', 'request_id'), 'review')
+        database.where('request_id = %s', request_id)
+
+        # try to run query
+        results = database.run()
+
+        # if nothing is found return None
+        if len(results) == 0:
+            return None
+
+        review = Review(review_id=results[0][0], rating=results[0][0], comment=results[0][0], request_id=results[0][0])
+
+        return review
+
+    @staticmethod
     def ToAPI(obj):
         if isinstance(obj, Review):
             remap = {
