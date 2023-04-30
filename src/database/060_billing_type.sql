@@ -7,4 +7,4 @@ CREATE TABLE billing_type (
 
 CREATE INDEX idx_billing_type_name ON billing_type(billing_type_name);
 
-CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name, retired);
+CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name);

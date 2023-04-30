@@ -1,7 +1,9 @@
 from flask import Blueprint
 from flask import request
+from flask_cors import cross_origin
+
 from tools.request_construct import Request_Construct
-from security.Security_Controller import Security_Controller
+from service.Service_Controller import Service_Controller
 
 
 # create service routes blueprint
@@ -13,36 +15,56 @@ service_base = "serviceRequest"
 
 # routes
 @service_blueprint.get("/{}".format(service_base))
+@cross_origin()
 def serviceRequestGet():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @service_blueprint.post("/{}".format(service_base))
+@cross_origin()
 def serviceRequestCreate():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @service_blueprint.put("/{}".format(service_base))
+@cross_origin()
 def serviceRequestUpdate():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @service_blueprint.get("/{}/available".format(service_base))
+@cross_origin()
 def availableServiceRequest():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @service_blueprint.post("/{}/application".format(service_base))
+@cross_origin()
 def applicationCreate():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @service_blueprint.put("/{}/application".format(service_base))
+@cross_origin()
 def applicationUpdate():
-    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
+
+
+@service_blueprint.get("/{}/review".format(service_base))
+@cross_origin()
+def ReviewGet():
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
+
+
+@service_blueprint.post("/{}/review".format(service_base))
+@cross_origin()
+def ReviewCreate():
+    result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
     return result

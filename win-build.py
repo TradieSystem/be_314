@@ -27,7 +27,6 @@ database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mo
 
 # start flask
 flask_process = Popen("start_flask.bat", creationflags=CREATE_NEW_CONSOLE)
-print
 
 # wait for shutdown command
 print("Please Type Shutdown code 'kill':")

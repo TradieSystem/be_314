@@ -113,7 +113,7 @@ CREATE TABLE billing_type (
 
 CREATE INDEX idx_billing_type_name ON billing_type(billing_type_name);
 
-CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name, retired);  
+CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name);  
   
 -- ---------------------------- 
 -- From: 070_billing.sql 
@@ -312,10 +312,23 @@ CREATE TABLE request_bid (
 );  
   
 -- ---------------------------- 
--- From: 300_insert_billing_type.sql 
-INSERT INTO billing_type (billing_type_name,retired) VALUES ('Out', null);
+-- From: 220_review.sql 
+CREATE TABLE review (
+    review_id       MEDIUMINT NOT NULL AUTO_INCREMENT,
+    request_id      MEDIUMINT NOT NULL,
+    rating          DECIMAL(10,2) NOT NULL,
+    comment         VARCHAR(4000),
+    PRIMARY KEY (review_id),
+    FOREIGN KEY (request_id) REFERENCES request(request_id)
+);
 
-INSERT INTO billing_type (billing_type_name,retired) VALUES ('In', null);
+CREATE UNIQUE INDEX uc_request_review_id ON review(review_id, request_id);  
+  
+-- ---------------------------- 
+-- From: 300_insert_billing_type.sql 
+INSERT INTO billing_type (billing_type_name) VALUES ('Out');
+
+INSERT INTO billing_type (billing_type_name) VALUES ('In');
 
 COMMIT;  
   
