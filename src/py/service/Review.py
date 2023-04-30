@@ -16,8 +16,7 @@ from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToC
 
 @dataclass
 class Review:
-    review_id: int
-    review_date: datetime = None
+    review_id: int = None
     rating: float = None
     comment: str = None
     request_id: int = None
@@ -33,7 +32,7 @@ class Review:
             raise DatabaseConnectionError(table='review', query=None, database_object=None)
 
         # construct query for creation
-        database.insert(self, 'review', ('review_id', ))
+        database.insert(self, 'review', ('review_id',))
 
         # try to run query
         try:
@@ -65,7 +64,7 @@ class Review:
         pass
 
     @staticmethod
-    def get_review(request_id: int):
+    def get_review(review_id: int):
         # create database session
         database = Database.database_handler(DatabaseLookups.User)
 
@@ -77,19 +76,33 @@ class Review:
             raise DatabaseConnectionError(table='review', query=None, database_object=None)
 
         # create query for database connection
-        database.select(('request_id',), 'request')
-        database.where('professional_id = %s', professional_id)
+        database.select(('review_id', 'rating', 'comment', 'request_id'), 'review')
+        database.where('review_id = %s', review_id)
 
         # try to run query
         results = database.run()
 
         # if nothing is found return error
-        if len(results) == 0:
-            return None
+        review = Review(review_id=results[0][0], rating=results[0][0], comment=results[0][0], request_id=results[0][0])
 
-        # parse into request object
-        requests = []
-        for result in results:
-            requests.append(Request.get_request(result[0]))
+        return review
 
-        return requests
+    @staticmethod
+    def ToAPI(obj):
+        if isinstance(obj, Review):
+            remap = {
+                "reviewID": obj.review_id,
+                "rating": obj.rating,
+                "review": obj.comment,
+                "request_id": obj.request_id
+            }
+
+            return remap
+
+        raise TypeError
+
+    @staticmethod
+    def FromAPI(obj):
+        # get request status ids
+        return Review(review_id=obj.get('reviewID'), rating=obj.get('rating'), comment=obj.get('review'),
+                      request_id=obj.get('request_id'))

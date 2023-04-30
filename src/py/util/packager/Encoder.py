@@ -7,6 +7,7 @@ import orjson
 import user
 from service.Request import Request
 from service.Request_Bid import Request_Bid
+from service.Review import Review
 from user.Address import Address
 from user.Billing import Billing
 from user.Client import Client
@@ -51,5 +52,8 @@ class Encoder:
 
         elif isinstance(obj, Request_Bid):
             return Request_Bid.ToAPI(obj)
+
+        elif isinstance(obj, Review):
+            return Review.ToAPI(obj)
 
         raise TypeError

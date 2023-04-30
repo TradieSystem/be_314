@@ -7,6 +7,7 @@ import json
 
 from service.Request import Request
 from service.Request_Bid import Request_Bid
+from service.Review import Review
 from user.User import User
 from user.Address import Address
 from user.Billing import Billing
@@ -63,6 +64,9 @@ class Decoder:
 
         elif 'applicationID' in obj.keys():
             return Request_Bid.FromAPI(obj)
+
+        elif 'reviewID' in obj.keys():
+            return Review.FromAPI(obj)
 
         else:
             return None
