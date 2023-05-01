@@ -17,7 +17,7 @@ service_base = "serviceRequest"
 @service_blueprint.get("/{}".format(service_base))
 def serviceRequestGet():
     result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
-
+    print(result)
     if result is None:
         return {}
 
