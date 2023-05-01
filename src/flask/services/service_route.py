@@ -18,7 +18,7 @@ service_base = "serviceRequest"
 @cross_origin()
 def serviceRequestGet():
     result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
-    
+
     if result is None:
         return {}
 
@@ -50,6 +50,10 @@ def availableServiceRequest():
 @cross_origin()
 def applicationCreate():
     result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
+
+    if result is None:
+        return {}
+    
     return result
 
 
