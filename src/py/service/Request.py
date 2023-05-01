@@ -260,10 +260,10 @@ class Request:
                 professional_id = None
 
             # revert ids into names for api results
-            service_name = Service.get_by_service_id(obj.service_id).service_name
-            status_name = Request_Status.get_request_status_by_id(obj.request_status_id).status_name
+            service_name = Service.get_by_service_id(obj.service_id).service_name if obj.service_id is not None else None
+            status_name = Request_Status.get_request_status_by_id(obj.request_status_id).status_name if obj.request_status_id is not None else None
             client_id = Client.get_by_client_id(obj.client_id).user_id if obj.client_id is not None else None
-
+            print(obj)
             remap = {
                 "requestID": obj.request_id,
                 "requestDate": obj.request_date.strftime('%m/%d/%Y') if obj.request_date is not None else None,
@@ -273,8 +273,7 @@ class Request:
                 "postcode": obj.postcode,
                 "clientID": client_id,
                 "professionalID": professional_id,
-                "applications": obj.request_bids if obj.request_bids is not None else None,
-                "review": obj.review
+                "applications": obj.request_bids if obj.request_bids is not None else None
             }
 
             return remap
