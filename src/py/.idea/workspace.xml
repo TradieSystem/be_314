@@ -4,6 +4,7 @@
     <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../flask/services/service_route.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/services/service_route.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/Request_Bid.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Request_Bid.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/Request.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Request.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/Review.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Review.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/Service_Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Service_Controller.py" afterDir="false" />
@@ -46,6 +47,8 @@
       <recent name="D:\Data\User Data\Documents\Documentation\Studies\University\CSIT314\Group Project\Repos\be_314\src\py\service" />
     </key>
   </component>
+  <component name="RunManager" selected="Python tests.Python tests for test_request.MyTestCase.test_request_bid">
+    <configuration name="Python tests for test_request.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
   <component name="RunManager" selected="Python tests.Python tests for test_packager.TestPackager.test_request_packing">
     <configuration name="Python tests for test_packager.TestPackager.test_request_packing" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
@@ -57,7 +60,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_packager.TestPackager.test_request_packing&quot;" />
+      <option name="_new_target" value="&quot;test_request.MyTestCase&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -103,7 +106,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_request.MyTestCase.test_update_request" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_request.MyTestCase.test_request_bid" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -113,17 +116,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_request.MyTestCase.test_update_request&quot;" />
+      <option name="_new_target" value="&quot;test_request.MyTestCase.test_request_bid&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_update_request" />
-        <item itemvalue="Python tests.Python tests for test_packager.TestPackager.test_request_packing" />
-        <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_request" />
+        <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_request_bid" />
         <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_by_client_id" />
         <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_request_postcode" />
+        <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_request" />
+        <item itemvalue="Python tests.Python tests for test_request.MyTestCase" />
       </list>
     </recent_temporary>
   </component>
