@@ -17,7 +17,6 @@ user_base = "user"
 
 
 @user_blueprint.get("/{}/userGet".format(user_base))
-@cross_origin()
 def userGet():
     print(Request_Construct.construct_request(request))
     result = User_Controller.Event_Start(Request_Construct.construct_request(request))
@@ -28,35 +27,30 @@ def userGet():
 
 
 @user_blueprint.get("/{}/validate".format(user_base))
-@cross_origin()
 def userValidate():
     result = User_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @user_blueprint.post("/{}/login".format(user_base))
-@cross_origin()
 def userLogin():
     result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @user_blueprint.get("/{}/resetPassword".format(user_base))
-@cross_origin()
 def userResetPassword():
     result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @user_blueprint.post("/{}/userCreate".format(user_base))
-@cross_origin()
 def userCreate():
     result = User_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
 
 @user_blueprint.put("/{}/updateUser".format(user_base))
-@cross_origin()
 def userUpdate():
     result = User_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
