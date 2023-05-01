@@ -134,7 +134,7 @@ class Service_Controller:
         except FailedToCreateDatabaseObject as fcdo:
             return fcdo.generate_api_error()
 
-        return Result_Handler.no_status_code(request_bid)
+        return Result_Handler.no_status_code(new_request_bid)
 
     def update_application(self):
         json_body = self.__event.get('body-json')
