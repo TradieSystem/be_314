@@ -55,6 +55,7 @@ def applicationCreate():
 @service_blueprint.put("/{}/application".format(service_base))
 def applicationUpdate():
     result = Service_Controller.Event_Start(Request_Construct.construct_request(request))
+
     return result
 
 
