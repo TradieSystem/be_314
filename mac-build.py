@@ -16,7 +16,7 @@ join_script = "join.sh"
 
 # run docker build
 build_command = "docker build -t {}{} .".format(docker_image_name, docker_image_ver)
-Popen(build_command, shell=True)
+Popen(build_command)
 
 # move back to root and run docker start container
 run_command = 'docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver)
