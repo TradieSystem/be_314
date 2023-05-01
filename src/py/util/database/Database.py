@@ -6,9 +6,8 @@ from mysql.connector import errorcode, MySQLConnection, connect
 from botocore.exceptions import ClientError
 from util.database.DatabaseStatus import DatabaseStatus
 from util.database.DatabaseAction import DatabaseAction
-from util.database.DatabaseSymbol import DatabaseSymbol
 import boto3
-import json
+import socket
 
 
 class Database:
@@ -46,12 +45,25 @@ class Database:
             raise e
         """
 
-        # attempt database connection
-        try:
-            database = Database('csit314-gp.crjrzvrrbory.us-east-1.rds.amazonaws.com', 'Project',
-                                'user_lambda', 'uDb+J5Jr7vV)ek>')
-        except Error as err:
-            raise err
+        # check if local is open else use aws
+        # Creates a new socket
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        # Try to connect to local host on default port
+        if sock.connect_ex(("127.0.0.1", 3306)) == 0:
+            try:
+                database = Database('127.0.0.1', 'Project', 'root', 'ext50n123')
+            except Error as err:
+                raise err
+        else:
+            try:
+                database = Database('csit314-gp.crjrzvrrbory.us-east-1.rds.amazonaws.com', 'Project',
+                                    'user_lambda', 'uDb+J5Jr7vV)ek>')
+            except Error as err:
+                raise err
+
+        # Close the connection
+        sock.close()
 
         return database
 

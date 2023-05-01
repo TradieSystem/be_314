@@ -7,6 +7,12 @@
 -- From: 000_drop_all.sql 
 SET FOREIGN_KEY_CHECKS = 0;
 
+-- For Docker File
+CREATE DATABASE IF NOT EXISTS Project;
+COMMIT;
+USE Project;
+
+-- Original Normal Process
 DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS associated_service;
 DROP TABLE IF EXISTS authorisation;
@@ -107,7 +113,7 @@ CREATE TABLE billing_type (
 
 CREATE INDEX idx_billing_type_name ON billing_type(billing_type_name);
 
-CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name, retired);  
+CREATE UNIQUE INDEX uc_address_user_id ON billing_type(billing_type_name);  
   
 -- ---------------------------- 
 -- From: 070_billing.sql 
@@ -117,7 +123,7 @@ CREATE TABLE billing (
      user_id            MEDIUMINT NOT NULL,
      name               VARCHAR(100) NOT NULL,
      card_number        VARCHAR(256) NOT NULL,
-     expiry_date        DATE NOT NULL,
+     expiry_date        VARCHAR(20) NOT NULL,
      ccv                INT NOT NULL,
      billing_type_id    INT NOT NULL,       
      retired            DATE,
@@ -132,7 +138,7 @@ CREATE UNIQUE INDEX uc_billing_user_id ON billing(user_id, billing_type_id, reti
 CREATE TABLE security_question (
      security_question_id  INT NOT NULL AUTO_INCREMENT,
      question              VARCHAR(2000) NOT NULL,
-     retired               DATETIME NOT NULL,
+     retired               DATETIME,
      PRIMARY KEY (security_question_id)
 );  
   
@@ -306,10 +312,23 @@ CREATE TABLE request_bid (
 );  
   
 -- ---------------------------- 
--- From: 300_insert_billing_type.sql 
-INSERT INTO billing_type (billing_type_name,retired) VALUES ('Out', null);
+-- From: 220_review.sql 
+CREATE TABLE review (
+    review_id       MEDIUMINT NOT NULL AUTO_INCREMENT,
+    request_id      MEDIUMINT NOT NULL,
+    rating          DECIMAL(10,2) NOT NULL,
+    comment         VARCHAR(4000),
+    PRIMARY KEY (review_id),
+    FOREIGN KEY (request_id) REFERENCES request(request_id)
+);
 
-INSERT INTO billing_type (billing_type_name,retired) VALUES ('In', null);
+CREATE UNIQUE INDEX uc_request_review_id ON review(review_id, request_id);  
+  
+-- ---------------------------- 
+-- From: 300_insert_billing_type.sql 
+INSERT INTO billing_type (billing_type_name) VALUES ('Out');
+
+INSERT INTO billing_type (billing_type_name) VALUES ('In');
 
 COMMIT;  
   

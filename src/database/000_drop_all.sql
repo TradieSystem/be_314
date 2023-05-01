@@ -1,5 +1,11 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
+-- For Docker File
+CREATE DATABASE IF NOT EXISTS Project;
+COMMIT;
+USE Project;
+
+-- Original Normal Process
 DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS associated_service;
 DROP TABLE IF EXISTS authorisation;
