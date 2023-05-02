@@ -190,9 +190,7 @@ class Request_Bid:
 
         # parse into request object
         return Request_Bid(request_bid_id=result[0][0], request_id=result[0][1], professional_id=result[0][2],
-                                  amount=result[0][3], sent_date=result[0][4], bid_status_id=result[0][5])
-
-
+                           amount=result[0][3], sent_date=result[0][4], bid_status_id=result[0][5])
 
     @staticmethod
     def get_by_request_id(request_id: int) -> ['Request_Bid']:
@@ -232,8 +230,10 @@ class Request_Bid:
                 "applicationID": obj.request_bid_id,
                 "requestID": obj.request_id,
                 "offerDate": obj.sent_date.strftime('%m/%d/%Y') if obj.sent_date is not None else None,
-                "professionalID": Professional.get_by_professional_id(obj.professional_id).user_id if obj.professional_id is not None else None,
-                "applicationStatus": Bid_Status.get_by_status_id(obj.bid_status_id).status_name if obj.bid_status_id is not None else None,
+                "professionalID": Professional.get_by_professional_id(
+                    obj.professional_id).user_id if obj.professional_id is not None else None,
+                "applicationStatus": Bid_Status.get_by_status_id(
+                    obj.bid_status_id).status_name if obj.bid_status_id is not None else None,
                 "cost": obj.amount.__str__()
             }
 
@@ -244,7 +244,8 @@ class Request_Bid:
     @staticmethod
     def FromAPI(obj):
         # convert user_id for professional to professional_id
-        professional_id = User.get_user(obj.get('professionalID')).professional.professional_id if obj.get('professionalID') is not None else None
+        professional_id = User.get_user(obj.get('professionalID')).professional.professional_id if obj.get(
+            'professionalID') is not None else None
 
         # get bid status id
         if obj.get('applicationStatus') is not None:
@@ -256,5 +257,6 @@ class Request_Bid:
         sent_date = datetime.strptime(obj.get('offerDate'), '%m/%d/%Y') if obj.get('offerDate') is not None else None
 
         # create object
-        return Request_Bid(request_bid_id=obj.get('applicationID'), request_id=obj.get('requestID'), sent_date=sent_date,
+        return Request_Bid(request_bid_id=obj.get('applicationID'), request_id=obj.get('requestID'),
+                           sent_date=sent_date,
                            professional_id=professional_id, amount=obj.get('cost'), bid_status_id=bid_status_id)

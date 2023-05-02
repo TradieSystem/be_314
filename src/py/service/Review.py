@@ -83,7 +83,7 @@ class Review:
         results = database.run()
 
         # if nothing is found return error
-        review = Review(review_id=results[0][0], rating=results[0][0], comment=results[0][0], request_id=results[0][0])
+        review = Review(review_id=results[0][0], rating=results[0][1], comment=results[0][2], request_id=results[0][3])
 
         return review
 
@@ -110,7 +110,7 @@ class Review:
         if len(results) == 0:
             return None
 
-        review = Review(review_id=results[0][0], rating=results[0][0], comment=results[0][0], request_id=results[0][0])
+        review = Review(review_id=results[0][0], rating=results[0][1], comment=results[0][2], request_id=results[0][3])
 
         return review
 
@@ -119,7 +119,7 @@ class Review:
         if isinstance(obj, Review):
             remap = {
                 "reviewID": obj.review_id,
-                "rating": obj.rating,
+                "rating": float(obj.rating.__str__()),
                 "review": obj.comment,
                 "request_id": obj.request_id
             }

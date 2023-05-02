@@ -20,13 +20,16 @@ run([join_script])
 
 # move back to root and run docker build
 os.chdir("../..")
-run("docker build -t {}{} .".format(docker_image_name, docker_image_ver))
+docker_build = "docker build -t {}{} .".format(docker_image_name, docker_image_ver)
+run(docker_build)
 
 # move back to root and run docker start container
-database_process = Popen('docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver), creationflags=CREATE_NEW_CONSOLE)
+docker_run = 'docker run -p 3306:3306 --name {} {}{} mysqld --sql-mode=""'.format(docker_container_name, docker_image_name, docker_image_ver)
+database_process = Popen(docker_run, creationflags=CREATE_NEW_CONSOLE)
 
 # start flask
-flask_process = Popen("start_flask.bat", creationflags=CREATE_NEW_CONSOLE)
+flask_run = "start_flask.bat"
+flask_process = Popen(flask_run, creationflags=CREATE_NEW_CONSOLE)
 
 # wait for shutdown command
 print("Please Type Shutdown code 'kill':")

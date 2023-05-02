@@ -20,5 +20,6 @@ class DatabaseError(API_Exception):
         return {
             "statusCode": self.get_status_code(),
             "errorOnTable": self.__table,
+            "error": self.__str__(),
             "errorFromQuery": self.__query
         }
