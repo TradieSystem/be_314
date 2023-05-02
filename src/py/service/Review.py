@@ -119,7 +119,7 @@ class Review:
         if isinstance(obj, Review):
             remap = {
                 "reviewID": obj.review_id,
-                "rating": obj.rating.__str__(),
+                "rating": float(obj.rating.__str__()),
                 "review": obj.comment,
                 "request_id": obj.request_id
             }
