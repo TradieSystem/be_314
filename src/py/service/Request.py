@@ -273,7 +273,8 @@ class Request:
                 "postcode": obj.postcode,
                 "clientID": client_id,
                 "professionalID": professional_id,
-                "applications": obj.request_bids if obj.request_bids is not None else None
+                "applications": obj.request_bids if obj.request_bids is not None else None,
+                "review": obj.review if obj.review is not None else None
             }
 
             return remap
