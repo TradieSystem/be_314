@@ -63,7 +63,8 @@ Please use Python 3.9 as that is what is supported by AWS Lambda currently, if y
 <br/>
 
 # Running Locally
-If you wish to run the project locally, please navigate to the root directory of the repository in **cmd** and run the command __python build.py__. This will set up your docker instance with MySQL and start the flask instance at the same time.
+If you wish to run the project locally, please ensure that you have both Python 3.9 and Docker installed on your system (the links for both can be found above). Once you have confirmed that Python and Docker are installed please navigate to the cloned repository on your computer by opening **cmd** and entering the command **cd** followed by the path to the backend repository. Once in the root of the repository please enter **python win-build.py** for Windows and **python mac-build.py** for MacOS. Once started you should see console windows open up running both the API flask instance and the Docker containing MySQL, allow some time for the docker to complete starting up. <br/>
+Enjoy Testing!!!
 
 <br/>
 <br/>
