@@ -110,7 +110,7 @@ class Review:
         if len(results) == 0:
             return None
 
-        review = Review(review_id=results[0][0], rating=results[0][0], comment=results[0][0], request_id=results[0][0])
+        review = Review(review_id=results[0][0], rating=results[0][1], comment=results[0][2], request_id=results[0][3])
 
         return review
 
