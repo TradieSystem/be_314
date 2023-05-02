@@ -274,7 +274,7 @@ class Request:
                 "clientID": client_id,
                 "professionalID": professional_id,
                 "applications": obj.request_bids if obj.request_bids is not None else None,
-                "review": obj.review.comment if obj.review is not None is not None and obj.review.comment else None,
+                "review": obj.review.comment if obj.review is not None and obj.review.comment is not None else None,
                 "rating": float(obj.review.rating.__str__()) if obj.review is not None and obj.review.rating is not None else None
             }
 
