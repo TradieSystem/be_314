@@ -162,5 +162,6 @@ class Service_Controller:
     def create_review(self):
         review = Decoder(json.dumps(self.__event.get('body-json'))).deserialize()
         new_review = review.create_review()
+        print(new_review)
         return Result_Handler.no_status_code(new_review)
 
