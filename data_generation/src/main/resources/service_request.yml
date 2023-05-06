@@ -1,0 +1,11 @@
+en:
+  faker:
+    service_request:
+      requested_actions:
+        - "Install"
+        - "Upgrade"
+        - "Remove"
+        - "Fix"
+      target_status:
+        - "New"
+        - "Damaged"
