@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 public class SqlGenerator<T> {
     T instance;
@@ -8,21 +9,27 @@ public class SqlGenerator<T> {
 
     public SqlGenerator(T instance, String table) {
         this.instance = instance;
-        fields = instance.getClass().getFields();
+        this.fields = instance.getClass().getDeclaredFields();
         this.table = table;
     }
 
-    private String generateQuery() throws NoSuchFieldException, IllegalAccessException {
-
-
+    public String generateQuery() throws NoSuchFieldException, IllegalAccessException {
+        String fields = "";
         String values = "";
-        for (int i = 0; i <= this.fields.length; i++) {
+        for (int i = 0; i < this.fields.length; i++) {
+            if (Modifier.isStatic(this.fields[i].getModifiers())) continue; // skip if static field
+
+            // if it is the last field do not add ','
             if (i + 1 < this.fields.length) {
-                values += "'" + this.instance.getClass().getDeclaredField(this.fields[i].toString()).get(this) + ",'";
+                fields += String.format("%s,", this.fields[i].getName());
+                values += "'" + String.valueOf(this.instance.getClass().getDeclaredField(this.fields[i].getName()).get(instance)) + "',";
             }
-            else values += "'" + this.instance.getClass().getDeclaredField(this.fields[i].toString()).get(this) + "'";
+            else {
+                fields += String.format("%s", this.fields[i].getName());
+                values += "'" + String.valueOf(this.instance.getClass().getDeclaredField(this.fields[i].getName()).get(instance)) + "'";
+            }
         }
 
-        return String.format("INSERT INTO %s VALUES (%s)", table);
+        return String.format("INSERT INTO %s (%s) VALUES (%s)", table, fields, values);
     }
 }

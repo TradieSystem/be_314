@@ -1,5 +1,12 @@
 package Types.User;
 
+import net.datafaker.Faker;
+import net.datafaker.transformations.Field;
+import net.datafaker.transformations.JavaObjectTransformer;
+import net.datafaker.transformations.Schema;
+
+import static net.datafaker.transformations.Field.field;
+
 public class RandomUser {
     public static final String TABLE = "user";
     public int user_id;
@@ -9,5 +16,30 @@ public class RandomUser {
     public String mobile;
     public String password;
 
+
+
     public RandomUser() {}
+
+    public static RandomUser GenerateUser() {
+        Faker faker = new Faker();
+        JavaObjectTransformer transfomer = new JavaObjectTransformer();
+        Schema<Object, ?> userSchema= Schema.of(
+                Field.field("first_name", () -> faker.name().firstName()),
+                Field.field("last_name", () -> faker.name().lastName()),
+                Field.field("email_address", () -> faker.name().username() + "@outlook.com"),
+                Field.field("mobile", () -> faker.phoneNumber().phoneNumberNational()),
+                Field.field("password", () -> faker.regexify("[a-zA-Z0-9_.!@#$%^&*()]{6,12}"))
+        );
+
+        return (RandomUser) transfomer.apply(RandomUser.class, userSchema);
+    }
+
+    public static class TemplateUser {
+        // template values
+        private String first_name;
+        private String last_name;
+        private String email_address;
+        private String mobile;
+        private String password;
+    }
 }
