@@ -8,7 +8,8 @@ Some Notes:
  */
 
 public class RandomReview {
-    private int rating; // random number between 1 and 5
-    private String comment;
-    private int request_id; // must not be randomised, based off a request instead
+    public static final String TABLE = "review";
+    public int rating; // random number between 1 and 5
+    public String comment;
+    public int request_id; // must not be randomised, based off a request instead
 }
