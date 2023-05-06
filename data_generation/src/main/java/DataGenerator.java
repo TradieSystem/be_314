@@ -1,33 +1,40 @@
 import Types.User.*;
-import net.datafaker.Faker;
-import net.datafaker.transformations.Field;
-import net.datafaker.transformations.Schema;
-import net.datafaker.transformations.JavaObjectTransformer;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DataGenerator {
     // user information
-    private List<RandomUser> randomUsers;
-    private List<RandomAddress> randomAddresses;
-    private List<RandomBilling> randomBillings;
-    private List<RandomClient> randomClients;
-    private List<RandomProfessional> randomProfessionals;
+    private ArrayList<RandomUser> randomUsers;
+    private ArrayList<RandomAddress> randomAddresses;
+    private ArrayList<RandomBilling> randomBillings;
+    private ArrayList<RandomClient> randomClients;
+    private ArrayList<RandomProfessional> randomProfessionals;
 
-    public void GenerateData(int numberOfUsers, int numberOfRequests) {
-        this.GenerateUsers(10);
+    private int numberOfUsers;
+    private int numberOfRequests;
+
+    public DataGenerator(int numberOfUsers, int numberOfRequests) {
+        this.randomUsers = new ArrayList<>();
+        this.randomAddresses = new ArrayList<>();
+        this.randomBillings = new ArrayList<>();
+        this.randomClients = new ArrayList<>();
+        this.randomProfessionals = new ArrayList<>();
+        this.numberOfUsers = numberOfUsers;
+        this.numberOfRequests = numberOfRequests;
+
+    }
+
+    public void GenerateData() {
+        this.GenerateUsers(numberOfUsers);
+        SqlGenerator<RandomUser> sqlGenerator = new SqlGenerator<RandomUser>(randomUsers, RandomUser.TABLE);
+        System.out.println(sqlGenerator.GenerateScript());
     }
 
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
-        RandomUser user = RandomUser.GenerateUser();
-        SqlGenerator<RandomUser> sqlGenerator = new SqlGenerator<RandomUser>(user, "user");
-        try {
-            System.out.println(sqlGenerator.generateQuery());
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+        // generate random users
+        for (int i = 0; i < numberOfUsers; i++) {
+            randomUsers.add(RandomUser.GenerateUser());
         }
     }
 

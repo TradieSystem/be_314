@@ -9,6 +9,7 @@ import static net.datafaker.transformations.Field.field;
 
 public class RandomUser {
     public static final String TABLE = "user";
+    public static int CURRENT_USER_ID = 1;
     public int user_id;
     public String first_name;
     public String last_name;
@@ -32,14 +33,5 @@ public class RandomUser {
         );
 
         return (RandomUser) transfomer.apply(RandomUser.class, userSchema);
-    }
-
-    public static class TemplateUser {
-        // template values
-        private String first_name;
-        private String last_name;
-        private String email_address;
-        private String mobile;
-        private String password;
     }
 }
