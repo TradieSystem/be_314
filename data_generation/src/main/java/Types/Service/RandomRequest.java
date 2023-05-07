@@ -1,5 +1,6 @@
 package Types.Service;
 
+import Provider.CustomRequestFaker;
 import Types.User.RandomUser;
 import net.datafaker.Faker;
 import net.datafaker.transformations.Field;
@@ -7,6 +8,7 @@ import net.datafaker.transformations.JavaObjectTransformer;
 import net.datafaker.transformations.Schema;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /*
 We are not using start_date and completion_date in the final product.
@@ -15,6 +17,7 @@ Will confirm this but at the moment it is not included
 public class RandomRequest {
     public static final String TABLE = "request";
     public static int CURRENT_REQUEST_ID = 1;
+    public int request_id;
     public Date request_date;
     public String instruction; // this will use a custom provider
     public String postcode; // should be based on the already generated postcodes
@@ -23,16 +26,19 @@ public class RandomRequest {
     public int service_id; // must be based on the provided services
     public int request_status_id; // possibly should be generated first and all other attributes based off it
 
-    public static RandomRequest GenerateRequest() {
+    public static RandomRequest GenerateRequest(int client_id) {
         Faker faker = new Faker();
+        CustomRequestFaker requestFaker = new CustomRequestFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> requestSchema = Schema.of(
-                Field.field("user_id", () -> RandomRequest.CURRENT_REQUEST_ID++),
-                Field.field("first_name", () -> faker.name().firstName()),
-                Field.field("last_name", () -> faker.name().lastName()),
-                Field.field("email_address", () -> faker.name().username() + "@outlook.com"),
-                Field.field("mobile", () -> faker.phoneNumber().phoneNumberNational()),
-                Field.field("password", () -> faker.regexify("[a-zA-Z0-9_.!@#$%^&*()]{6,12}"))
+                Field.field("request_id", () -> RandomRequest.CURRENT_REQUEST_ID++),
+                Field.field("request_date", () -> faker.date().future(30, TimeUnit.DAYS)),
+                Field.field("instruction", () -> requestFaker.request().description()),
+                Field.field("postcode", () -> faker.regexify("[1-3]{1}[0-9]{1}[0-9]{1}[0-9]{1}")),
+                Field.field("client_id", () -> client_id),
+                Field.field("professional_id", () -> 0),
+                Field.field("service_id", () -> 0),
+                Field.field("request_status_id", () -> faker.random().nextInt(1,5)) // first service_id is 1 and last is 5
         );
 
         return (RandomRequest) transfomer.apply(RandomRequest.class, requestSchema);

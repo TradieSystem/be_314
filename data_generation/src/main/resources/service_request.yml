@@ -25,10 +25,22 @@ en:
 
       good_review:
         - "This was a fantastic service, thank you so much!"
-        - "Couldn't almost no issues here, great provider."
+        - "Almost no issues here, when there was they were sorted very quickly, great provider!"
         - "Would hire this tradie again, great person!"
         - "Why would I ever hire anyone else for this type of job?"
 
       fair_review:
+        - "Service was okay but left a lot to be desired..."
+        - "Not sure I would hire this tradie again"
+        - "Wasn't too friendly, did get a somewhat decent job done"
+        - "Could have been better, somewhat disappointed"
+        - "Not sure if I could consider this a professional job..."
+        - "Job was okay but it felt like they left their professionalism at home!"
 
       bad_review:
+        - "Absolutely awful job, terrible service as well!"
+        - "Would not hire this person again, how do they even have a license???"
+        - "Didn't do what I asked, complained the entire time and was completely unprofessional!"
+        - "Overcharged and did a completely horrendous job, never coming to this person again!"
+        - "DO NOT HIRE THIS PERSON!!!!"
+        - "How the heck did this person get their license?????"

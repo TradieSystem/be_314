@@ -20,12 +20,30 @@ public class CustomRequestFaker extends BaseFaker {
             faker.addPath(Locale.ENGLISH, Paths.get("src\\main\\resources\\service_request.yml"));
         }
 
-        public String requestDescription() {
+        public String description() {
             return resolve(KEY + ".request_description");
         }
-    }
 
-    public static class Review {
+        public Review review() {
+            return new Review(this.faker);
+        }
 
+        public static class Review extends AbstractProvider<BaseProviders> {
+            public Review(BaseProviders faker) {
+                super(faker);
+            }
+
+            public String good() {
+                return resolve(KEY + ".good_review");
+            }
+
+            public String fair() {
+                return resolve(KEY + ".fair_review");
+            }
+
+            public String bad() {
+                return resolve(KEY + ".bad_review");
+            }
+        }
     }
 }

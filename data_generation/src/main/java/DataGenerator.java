@@ -1,3 +1,4 @@
+import Types.Service.RandomRequest;
 import Types.User.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -10,6 +11,7 @@ public class DataGenerator {
     private ArrayList<RandomBilling> randomBillings;
     private ArrayList<RandomClient> randomClients;
     private ArrayList<RandomProfessional> randomProfessionals;
+    private ArrayList<RandomRequest> randomRequests;
 
     private int numberOfUsers;
     private int numberOfRequests;
@@ -20,14 +22,16 @@ public class DataGenerator {
         this.randomBillings = new ArrayList<>();
         this.randomClients = new ArrayList<>();
         this.randomProfessionals = new ArrayList<>();
+        this.randomRequests = new ArrayList<>();
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
     }
 
     public void GenerateData() {
-        this.GenerateUsers(numberOfUsers);
-    }
 
+        this.GenerateUsers(numberOfUsers);
+        this.GenerateRequests(numberOfRequests);
+    }
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
         // generate random users
@@ -56,6 +60,12 @@ public class DataGenerator {
     }
 
     private void GenerateRequests(int numberOfRequests) {
+        for (int i = 0; i < numberOfRequests; i++) {
+            randomRequests.add(RandomRequest.GenerateRequest(2));
+        }
+
+        SqlGenerator<RandomRequest> generator = new SqlGenerator<>(randomRequests, RandomRequest.TABLE);
+        System.out.println(generator.GenerateScript());
 
     }
 
