@@ -1,11 +1,34 @@
 en:
   faker:
-    service_request:
-      requested_actions:
-        - "Install"
-        - "Upgrade"
-        - "Remove"
-        - "Fix"
-      target_status:
-        - "New"
-        - "Damaged"
+    request:
+      request_description:
+        - "Request 1"
+        - "Request 2"
+        - "Request 3"
+        - "Request 4"
+        - "Request 5"
+        - "Request 6"
+        - "Request 7"
+        - "Request 8"
+        - "Request 9"
+        - "Request 10"
+        - "Request 11"
+        - "Request 12"
+        - "Request 13"
+        - "Request 14"
+        - "Request 15"
+        - "Request 16"
+        - "Request 17"
+        - "Request 18"
+        - "Request 19"
+        - "Request 20"
+
+      good_review:
+        - "This was a fantastic service, thank you so much!"
+        - "Couldn't almost no issues here, great provider."
+        - "Would hire this tradie again, great person!"
+        - "Why would I ever hire anyone else for this type of job?"
+
+      fair_review:
+
+      bad_review:
