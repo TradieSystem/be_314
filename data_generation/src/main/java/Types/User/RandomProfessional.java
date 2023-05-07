@@ -1,12 +1,12 @@
 package Types.User;
-import Types.Service.RandomService;
+import Types.Service.Service;
 import java.util.ArrayList;
 
 public class RandomProfessional {
     public static final String TABLE = "professional";
     public int professional_id;
     public int subscription_id = 1; // id of subscription based
-    public ArrayList<RandomService> services;
+    public ArrayList<Service> services;
     public RandomBilling CCin;
     public int user_id; // should not be randomised
 

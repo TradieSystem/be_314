@@ -5,8 +5,6 @@ import net.datafaker.transformations.Field;
 import net.datafaker.transformations.JavaObjectTransformer;
 import net.datafaker.transformations.Schema;
 
-import static net.datafaker.transformations.Field.field;
-
 public class RandomUser {
     public static final String TABLE = "user";
     public static int CURRENT_USER_ID = 1;
