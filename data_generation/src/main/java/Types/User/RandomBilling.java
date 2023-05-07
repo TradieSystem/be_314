@@ -13,4 +13,6 @@ public class RandomBilling {
     public RandomBilling(int user_id) {
         this.user_id = user_id;
     }
+
+    public static RandomBilling GenerateBilling(int user_id) { return null; }
 }

@@ -12,4 +12,6 @@ public class RandomAddress {
     public RandomAddress(int user_id) {
         this.user_id = user_id;
     }
+
+    public static RandomAddress GenerateAddress(int user_id) { return null; }
 }

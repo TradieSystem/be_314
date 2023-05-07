@@ -10,7 +10,7 @@ public class RandomProfessional {
     public RandomBilling CCin;
     public int user_id; // should not be randomised
 
-    public RandomProfessional(int user_id) {
-        this.user_id = user_id;
-    }
+    public RandomProfessional() {}
+
+    public static RandomProfessional GenerateProfessional(int user_id) { return null; }
 }
