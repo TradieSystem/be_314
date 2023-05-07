@@ -1,6 +1,7 @@
 import Types.User.*;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class DataGenerator {
     // user information
@@ -21,13 +22,10 @@ public class DataGenerator {
         this.randomProfessionals = new ArrayList<>();
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
-
     }
 
     public void GenerateData() {
         this.GenerateUsers(numberOfUsers);
-        SqlGenerator<RandomUser> sqlGenerator = new SqlGenerator<RandomUser>(randomUsers, RandomUser.TABLE);
-        System.out.println(sqlGenerator.GenerateScript());
     }
 
     // can remove, but for readability might be good to keep
@@ -35,6 +33,25 @@ public class DataGenerator {
         // generate random users
         for (int i = 0; i < numberOfUsers; i++) {
             randomUsers.add(RandomUser.GenerateUser());
+        }
+
+        // generate address for each user
+        for (int i = 0; i < randomUsers.size(); i++) {
+            // address generation goes here
+        }
+
+        // separate number of users into client and professionals: 25% of users will be professionals, rest clients
+        int professionals = (int) (randomUsers.size() * 0.25);
+        int clients = randomUsers.size() - professionals;
+
+        // generate professional data
+        for (int i = 0; i < professionals; i++) {
+            // professional generation goes here
+        }
+
+        // generate client data
+        for (int i = clients; i < randomUsers.size(); i++) {
+            randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
         }
     }
 

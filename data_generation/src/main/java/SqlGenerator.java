@@ -35,7 +35,7 @@ public class SqlGenerator<T> {
             if (Modifier.isStatic(fields[i].getModifiers())) continue; // skip if static field
             // if it is the last field do not add ','
             if (i + 1 < fields.length) {
-                columns.append(String.format("%s,", fields[i].getName()));
+                columns.append(String.format("%s,", fields[i].getName())); // adding the column name to columns string
                 values.append("'").append(String.valueOf(instance
                         .getClass()
                         .getDeclaredField(fields[i].getName())
