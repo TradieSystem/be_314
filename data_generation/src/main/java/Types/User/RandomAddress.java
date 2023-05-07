@@ -17,7 +17,7 @@ public class RandomAddress {
         this.user_id = user_id;
     }
 
-    public static RandomAddress GenerateAddress(int user_id) {
+    public static RandomAddress generate(int user_id) {
         RandomAddress entity = new RandomAddress(user_id);
         entity.address_id = CURRENT_ID++;
         Faker faker = new Faker();

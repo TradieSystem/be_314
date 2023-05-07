@@ -6,7 +6,7 @@ import Types.User.RandomProfessional;
 import net.datafaker.Faker;
 
 
-public class RandomAssociatedService_2 {
+public class RandomAssociatedService {
     public static int CURRENT_ID = 1;
     
     public static final String TABLE = "associated_service";
@@ -15,11 +15,11 @@ public class RandomAssociatedService_2 {
     public int service_id;
     public int professional_id;
     
-    public RandomAssociatedService_2() {
+    public RandomAssociatedService() {
     }
     
-    public static RandomAssociatedService_2 generate(RandomProfessional randomProfessional, List<Service> availableServices) {
-        RandomAssociatedService_2 entity = new RandomAssociatedService_2();
+    public static RandomAssociatedService generate(RandomProfessional randomProfessional, List<Service> availableServices) {
+        RandomAssociatedService entity = new RandomAssociatedService();
         entity.provided_service_id = CURRENT_ID++;
         Faker faker = new Faker();
         int pos =  faker.random().nextInt(1,availableServices.size());

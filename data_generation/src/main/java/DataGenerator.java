@@ -1,11 +1,9 @@
-import Types.Service.RandomAssociatedService_2;
+import Types.Service.RandomAssociatedService;
 import Types.Service.Service;
 import Types.User.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 
 public class DataGenerator {
     // user information
@@ -14,7 +12,7 @@ public class DataGenerator {
     private ArrayList<RandomBilling> randomBillings;
     private ArrayList<RandomClient> randomClients;
     private ArrayList<RandomProfessional> randomProfessionals;
-    private ArrayList<RandomAssociatedService_2> randomAssociatedServices;
+    private ArrayList<RandomAssociatedService> randomAssociatedServices;
     private ArrayList<RandomUserQuestion> randomUserQuestions;
 
     private int numberOfUsers;
@@ -39,7 +37,7 @@ public class DataGenerator {
     private void GenerateUsers(int numberOfUsers) {
         // generate random users
         for (int i = 0; i < numberOfUsers; i++) {
-            RandomUser user = RandomUser.GenerateUser();
+            RandomUser user = RandomUser.generate();
             randomUsers.add(user);
             // The list of available questions gets smaller for question already assigned to user
             List<SecurityQuestion> sqList = Arrays.asList(SecurityQuestion.values());
@@ -47,27 +45,28 @@ public class DataGenerator {
                 randomUserQuestions.add(RandomUserQuestion.generate(user, sqList));
             }
             // generate address for each user
-            randomAddresses.add(RandomAddress.GenerateAddress(user.user_id));
+            randomAddresses.add(RandomAddress.generate(user.user_id));
             
             // Half the users are professional
             if (i < numberOfUsers / 2) {
-                RandomProfessional professional = RandomProfessional.GenerateProfessional(user.user_id);
+                RandomProfessional professional = RandomProfessional.generate(user.user_id);
+                randomProfessionals.add(professional);
                 // 1/6th of the users professionals and client at same time.
                 if (i > numberOfUsers / 3) {
-                    randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
+                    randomClients.add(RandomClient.generate(randomUsers.get(i).user_id));
                     randomBillings.add(RandomBilling.generate(user, true));
                 }
                 
                 // Assign 1 to 4 services that the professional provides...
                 List<Service> serviceList = Arrays.asList(Service.values());
-                int numServices = RandomAssociatedService_2.getRandomInt(1,4);
+                int numServices = RandomAssociatedService.getRandomInt(1,4);
                 for (int j = 0; j< numServices; j++ ) {
-                    RandomAssociatedService_2.generate(professional, serviceList);
+                    randomAssociatedServices.add(RandomAssociatedService.generate(professional, serviceList));
                 }
                 randomBillings.add(RandomBilling.generate(user, false));
                 
             } else { 
-                randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
+                randomClients.add(RandomClient.generate(randomUsers.get(i).user_id));
                 randomBillings.add(RandomBilling.generate(user, true));
             }
         }

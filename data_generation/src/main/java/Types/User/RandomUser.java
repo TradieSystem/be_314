@@ -19,7 +19,7 @@ public class RandomUser {
 
     public RandomUser() {}
 
-    public static RandomUser GenerateUser() {
+    public static RandomUser generate() {
         Faker faker = new Faker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> userSchema= Schema.of(
