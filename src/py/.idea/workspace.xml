@@ -9,6 +9,7 @@
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RandomRequest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RandomReview.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RandomService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RequestBid.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/User/RandomAddress.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/User/RandomBilling.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/User/RandomClient.java" afterDir="false" />

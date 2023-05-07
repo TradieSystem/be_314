@@ -25,6 +25,7 @@ public class RandomUser {
         Faker faker = new Faker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> userSchema= Schema.of(
+                Field.field("user_id", () -> RandomUser.CURRENT_USER_ID++),
                 Field.field("first_name", () -> faker.name().firstName()),
                 Field.field("last_name", () -> faker.name().lastName()),
                 Field.field("email_address", () -> faker.name().username() + "@outlook.com"),
