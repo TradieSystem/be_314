@@ -2,26 +2,12 @@ en:
   faker:
     request:
       request_description:
-        - "Request 1"
-        - "Request 2"
-        - "Request 3"
-        - "Request 4"
-        - "Request 5"
-        - "Request 6"
-        - "Request 7"
-        - "Request 8"
-        - "Request 9"
-        - "Request 10"
-        - "Request 11"
-        - "Request 12"
-        - "Request 13"
-        - "Request 14"
-        - "Request 15"
-        - "Request 16"
-        - "Request 17"
-        - "Request 18"
-        - "Request 19"
-        - "Request 20"
+        tree_removal:
+          - "Tree leaning on my house, please remove quickly!"
+          - "Tree in front yard, obstructing my view of the beach."
+          - "Backyard tree has died, need a removal ASAP"
+          - "Tree has grown too large, I told my wife it was a horrible idea and now it's might fall on the house!"
+          - "Tree is almost touching power lines, this could be a disaster, please remove it!"
 
       good_review:
         - "This was a fantastic service, thank you so much!"

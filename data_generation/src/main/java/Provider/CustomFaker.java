@@ -7,7 +7,7 @@ import net.datafaker.providers.base.BaseProviders;
 import java.nio.file.Paths;
 import java.util.Locale;
 
-public class CustomRequestFaker extends BaseFaker {
+public class CustomFaker extends BaseFaker {
     public Request request() {
         return getProvider(Request.class, Request::new, this);
     }
@@ -20,12 +20,23 @@ public class CustomRequestFaker extends BaseFaker {
             faker.addPath(Locale.ENGLISH, Paths.get("src\\main\\resources\\service_request.yml"));
         }
 
-        public String description() {
-            return resolve(KEY + ".request_description");
+        public Description description() {
+            return new Description(this.faker);
         }
 
         public Review review() {
             return new Review(this.faker);
+        }
+
+        public static class Description extends AbstractProvider<BaseProviders> {
+
+            public Description(BaseProviders faker) {
+                super(faker);
+            }
+
+            public String tree() {
+                return resolve(KEY + ".request_description" + ".tree_removal");
+            }
         }
 
         public static class Review extends AbstractProvider<BaseProviders> {

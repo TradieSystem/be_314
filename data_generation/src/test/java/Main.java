@@ -1,4 +1,4 @@
-import Provider.CustomRequestFaker;
+import Provider.CustomFaker;
 import Types.User.RandomBilling;
 
 public class Main {

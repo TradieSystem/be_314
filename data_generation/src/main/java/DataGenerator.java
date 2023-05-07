@@ -35,9 +35,8 @@ public class DataGenerator {
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
         // generate random users
-        for (int i = 0; i < numberOfUsers; i++) {
-            randomUsers.add(RandomUser.GenerateUser());
-        }
+        for (int i = 0; i < numberOfUsers; i++) randomUsers.add(RandomUser.GenerateUser());
+
 
         // generate address for each user
         for (int i = 0; i < randomUsers.size(); i++) {
@@ -54,14 +53,16 @@ public class DataGenerator {
         }
 
         // generate client data
-        for (int i = clients; i < randomUsers.size(); i++) {
-            randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
-        }
+        for (int i = clients; i < randomUsers.size(); i++) randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
+
     }
 
     private void GenerateRequests(int numberOfRequests) {
+        Random random = new Random();
+
         for (int i = 0; i < numberOfRequests; i++) {
-            randomRequests.add(RandomRequest.GenerateRequest(2));
+            int client_id = random.nextInt(randomClients.size() - 1) * 1;
+            randomRequests.add(RandomRequest.GenerateRequest(client_id));
         }
 
         SqlGenerator<RandomRequest> generator = new SqlGenerator<>(randomRequests, RandomRequest.TABLE);

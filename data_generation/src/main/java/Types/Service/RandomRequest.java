@@ -1,6 +1,6 @@
 package Types.Service;
 
-import Provider.CustomRequestFaker;
+import Provider.CustomFaker;
 import Types.User.RandomUser;
 import net.datafaker.Faker;
 import net.datafaker.transformations.Field;
@@ -27,18 +27,17 @@ public class RandomRequest {
     public int request_status_id; // possibly should be generated first and all other attributes based off it
 
     public static RandomRequest GenerateRequest(int client_id) {
-        Faker faker = new Faker();
-        CustomRequestFaker requestFaker = new CustomRequestFaker();
+        CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> requestSchema = Schema.of(
                 Field.field("request_id", () -> RandomRequest.CURRENT_REQUEST_ID++),
                 Field.field("request_date", () -> faker.date().future(30, TimeUnit.DAYS)),
-                Field.field("instruction", () -> requestFaker.request().description()),
+                Field.field("instruction", () -> faker.request().description().tree()),
                 Field.field("postcode", () -> faker.regexify("[1-3]{1}[0-9]{1}[0-9]{1}[0-9]{1}")),
                 Field.field("client_id", () -> client_id),
-                Field.field("professional_id", () -> 0),
-                Field.field("service_id", () -> 0),
-                Field.field("request_status_id", () -> faker.random().nextInt(1,5)) // first service_id is 1 and last is 5
+                Field.field("professional_id", () -> -1),
+                Field.field("service_id", () -> faker.random().nextInt(1,5)), // first service_id is 1 and last is 5
+                Field.field("request_status_id", () -> faker.random().nextInt(1,5))
         );
 
         return (RandomRequest) transfomer.apply(RandomRequest.class, requestSchema);
