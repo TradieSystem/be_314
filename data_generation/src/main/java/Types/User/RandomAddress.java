@@ -1,5 +1,6 @@
 package Types.User;
 
+import Types.Service.Suburb;
 import net.datafaker.Faker;
 
 public class RandomAddress {
@@ -22,8 +23,10 @@ public class RandomAddress {
         Faker faker = new Faker();
         entity.street_number = faker.random().nextInt(1,200);
         entity.street_name = faker.address().streetName();
-        entity.suburb = faker.address().cityName();
-        entity.postcode = faker.address().postcode();       
+        int pos = faker.random().nextInt(0,Suburb.values().length-1);
+        Suburb suburb = Suburb.values()[pos];
+        entity.suburb = suburb.suburbName;
+        entity.postcode = suburb.postcode;
         return entity;        
     }
 }

@@ -55,6 +55,7 @@ public class DataGenerator {
                 // 1/6th of the users professionals and client at same time.
                 if (i > numberOfUsers / 3) {
                     randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
+                    randomBillings.add(RandomBilling.generate(user, true));
                 }
                 
                 // Assign 1 to 4 services that the professional provides...
@@ -63,9 +64,11 @@ public class DataGenerator {
                 for (int j = 0; j< numServices; j++ ) {
                     RandomAssociatedService_2.generate(professional, serviceList);
                 }
+                randomBillings.add(RandomBilling.generate(user, false));
                 
             } else { 
                 randomClients.add(RandomClient.GenerateClient(randomUsers.get(i).user_id));
+                randomBillings.add(RandomBilling.generate(user, true));
             }
         }
 
