@@ -8,6 +8,7 @@ Will confirm this but at the moment it is not included
  */
 public class RandomRequest {
     public static final String TABLE = "request";
+    
     public Date request_date;
     public String instruction; // this will use a custom provider
     public String postcode; // should be based on the already generated postcodes
