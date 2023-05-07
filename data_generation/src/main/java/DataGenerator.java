@@ -1,4 +1,5 @@
 import Types.Service.RandomAssociatedService;
+import Types.Service.RandomTransaction;
 import Types.Service.Service;
 import Types.User.*;
 import java.util.ArrayList;
@@ -7,14 +8,17 @@ import java.util.List;
 
 public class DataGenerator {
     // user information
-    private ArrayList<RandomUser> randomUsers;
-    private ArrayList<RandomAddress> randomAddresses;
-    private ArrayList<RandomBilling> randomBillings;
-    private ArrayList<RandomClient> randomClients;
-    private ArrayList<RandomProfessional> randomProfessionals;
-    private ArrayList<RandomAssociatedService> randomAssociatedServices;
+    private final ArrayList<RandomUser> randomUsers;
+    private final ArrayList<RandomAddress> randomAddresses;
+    private final ArrayList<RandomBilling> randomBillings;
+    private final ArrayList<RandomClient> randomClients;
+    private final ArrayList<RandomProfessional> randomProfessionals;
+    private final ArrayList<RandomAssociatedService> randomAssociatedServices;
     private ArrayList<RandomUserQuestion> randomUserQuestions;
-
+    private final ArrayList<RandomAuthorisation> randomAuthorisations;
+    private final ArrayList<RandomSession> randomSessions;
+    private final ArrayList<RandomTransaction> randomTransactions;
+    
     private int numberOfUsers;
     private int numberOfRequests;
 
@@ -24,9 +28,15 @@ public class DataGenerator {
         this.randomBillings = new ArrayList<>();
         this.randomClients = new ArrayList<>();
         this.randomProfessionals = new ArrayList<>();
+        this.randomUserQuestions = new ArrayList<>();        
+        this.randomAssociatedServices = new ArrayList<>();
+        this.randomAuthorisations = new ArrayList<>();
+        this.randomUserQuestions = new ArrayList<>();
+        this.randomSessions= new ArrayList<>();
+        this.randomTransactions= new ArrayList<>();
+
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
-        this.randomUserQuestions = new ArrayList<>();
     }
 
     public void GenerateData() {
@@ -68,6 +78,21 @@ public class DataGenerator {
             } else { 
                 randomClients.add(RandomClient.generate(randomUsers.get(i).user_id));
                 randomBillings.add(RandomBilling.generate(user, true));
+            }
+            
+            int numAuth = RandomAssociatedService.getRandomInt(1, 4); 
+            for (int j=0; j<numAuth;j++) {
+                 
+                RandomAuthorisation auth = RandomAuthorisation.generate(user);
+                if (j + 1 < numAuth) {
+                    auth.invalidated = "Y";
+                }                
+                randomAuthorisations.add(auth);
+                int numSessions = RandomAssociatedService.getRandomInt(1, 4);
+                for (int k=0; k < numSessions;k++) {
+                    boolean current = (j + 1 == numAuth &&  k + 1  == numSessions);
+                    randomSessions.add(RandomSession.generate(auth, current));
+                }
             }
         }
 
