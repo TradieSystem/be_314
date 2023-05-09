@@ -1,32 +1,75 @@
 en:
   faker:
     request:
-      request_description:
-        tree_removal:
-          - "Tree leaning on my house, please remove quickly!"
-          - "Tree in front yard, obstructing my view of the beach."
-          - "Backyard tree has died, need a removal ASAP"
-          - "Tree has grown too large, I told my wife it was a horrible idea and now it's might fall on the house!"
-          - "Tree is almost touching power lines, this could be a disaster, please remove it!"
+      description:
+        greeting:
+          - "Hello! Currently I have an issues with my"
+          - "Good Morning! There is an issue with the"
+          - "To whom this may concern, I have discovered an issue with my"
+          - "This morning I started having trouble with the"
+          - "I am not sure what is going on, but we are having trouble with the"
+          - "Good Afternoon! I have found an issue with the"
+          - "Hiya, there is a problem with our"
+          - "Bonjour sir/madam. The partner and I figured it would be best to get a professional to sort out the issue with the"
+          - "Help me! Problem with the"
+          - "Ayyyyyye pro man or woman, help us with the"
+          - "Awh man looks like there is an issue with the"
 
-      good_review:
-        - "This was a fantastic service, thank you so much!"
-        - "Almost no issues here, when there was they were sorted very quickly, great provider!"
-        - "Would hire this tradie again, great person!"
-        - "Why would I ever hire anyone else for this type of job?"
+        urgency:
+          - "Can this please be fixed ASAP!?"
+          - "Look forward to hearing from you."
+          - "Can we please have this sorted quickly?"
+          - "I do not want to be rude, but could this please be looked at with haste?"
+          - "If someone could look at this quickly I would be grateful!"
+          - "No rush on the issue."
+          - "Really wanna get this one fixed before my partner returns from their trip..."
+          - "Help me if my partner sees this and confirms they were right. This one might be bad haha..."
+          - "Gotta get this one done quick, interest rates are going right up might run out of funds soon!"
 
-      fair_review:
-        - "Service was okay but left a lot to be desired..."
-        - "Not sure I would hire this tradie again"
-        - "Wasn't too friendly, did get a somewhat decent job done"
-        - "Could have been better, somewhat disappointed"
-        - "Not sure if I could consider this a professional job..."
-        - "Job was okay but it felt like they left their professionalism at home!"
+        tree:
+          - "tree, it is leaning. Really badly so..."
+          - "tree, it has has fallen over. Tried to stop it though!"
+          - "tree, it has fallen on top of the house! Not the damn house!"
+          - "broken branch, it is hanging. Kinda looks like it might fall on the house uh..."
+          - "tree in the front yard. It is blocking our view of the coast."
+          - "front yard tree. My partner insisted that we plant a tree in the back yard. Now the council has complained
+            forcing us to remove the tree. I should never listened to my partner!!"
+          - "tree. Neighbour planted it actually and I hate it! Gotta get this thing removed."
 
-      bad_review:
-        - "Absolutely awful job, terrible service as well!"
-        - "Would not hire this person again, how do they even have a license???"
-        - "Didn't do what I asked, complained the entire time and was completely unprofessional!"
-        - "Overcharged and did a completely horrendous job, never coming to this person again!"
-        - "DO NOT HIRE THIS PERSON!!!!"
-        - "How the heck did this person get their license?????"
+        roof:
+          - "tiles, some have cracked."
+          - "roof. There was a storm that has damaged the front facing side of our roof."
+          - "roof. There is a lot of debris on the roof, can't be bothered to clean it..."
+          - "roof. Tree recently fell on the roof, looks like there are branches that were stuck in the gutters."
+          - "roof... Plane, landed on the roof, could someone clean that one up?"
+          - "roof. Some kids egged my damn roof, ONLY THE ROOF!"
+
+        fence:
+          - "fence, it is leaning forward."
+          - "fence, it is leaning backwards."
+          - "fence. It's an old early 2000s wooden fence, one of the posts has been broken in half."
+          - "gate. Someone's (my son) car backed into the gate, now it won't shut properly."
+          - "side gate. Dog smashed the side gate in, someone did mention that the post was rotting and I guess I should
+             have listened..."
+          - "front gate. So I uh was revving the old project car and forgot I had put her into gear so I flew into the 
+          front gate...partner's not gonna be too happy about that one."
+
+        plumbing:
+          - "toilet. Looks like it's backed up."
+          - "sink. Looks like it's clogged."
+          - "shower. Looks like it's clogged."
+          - "toilet. My youngest son thought it would be funny to flush his GI Joes down the damn toliet. Some sort of a 
+          undercover missing? I am not sure that kid is mine to be honest with you."
+          - "shower. My partner insists that the hair clogging up the shower is not hers. I am convinced she is half big foot"
+          - "shower. My daughter thought it would be a good idea some sort of make up cleaner down the drain. The pipes are
+          corroding now!"
+
+        oven:
+          - "Oven. Son thought it would be a neat experiment to leave a firecracker in there to see if the oven would make
+          it explode... well it did!"
+          - "Oven. It is not turning on seems like, and yes I did try turning it off and on again!"
+          - "Oven. Something weird is going on, it's cooling my food!"
+          - "Oven. It smells funny, might be from baking the 3D prints..."
+          - "Oven. All the knobs fell off so I can't make my damn pizza!"
+          - "Oven. Got no clue what is going on."
+          - "Oven. Partner tried to fix it, now it's smoking. Didn't want a smoker makes me feel bad I just quit 3 weeks ago."

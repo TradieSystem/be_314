@@ -1,8 +1,12 @@
 import Types.Service.RandomRequest;
 import Types.User.*;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class DataGenerator {
     // user information
@@ -58,11 +62,20 @@ public class DataGenerator {
     }
 
     private void GenerateRequests(int numberOfRequests) {
-        Random random = new Random();
+        Random random = new Random();  // to randomly choose client from randomClients
 
+        // iterate and generate requests based on set numberOfRequests
         for (int i = 0; i < numberOfRequests; i++) {
-            int client_id = random.nextInt(randomClients.size() - 1) * 1;
-            randomRequests.add(RandomRequest.GenerateRequest(client_id));
+            // randomly pick client to associate request to
+            RandomClient client = randomClients.get(random.nextInt(randomClients.size() - 1) + 1);
+
+            // find associated random user and match to generated address
+            int user_id = randomUsers.get(client.user_id).user_id;
+            String postcode = String.valueOf(randomAddresses.stream().filter(address -> address.user_id == user_id)
+                    .findFirst());
+
+            // pass client_id and calculated postcode and add randomly generated client to ArrayList
+            randomRequests.add(RandomRequest.GenerateRequest(client.client_id, postcode));
         }
 
         SqlGenerator<RandomRequest> generator = new SqlGenerator<>(randomRequests, RandomRequest.TABLE);

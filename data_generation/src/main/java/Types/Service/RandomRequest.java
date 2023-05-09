@@ -26,7 +26,7 @@ public class RandomRequest {
     public int service_id; // must be based on the provided services
     public int request_status_id; // possibly should be generated first and all other attributes based off it
 
-    public static RandomRequest GenerateRequest(int client_id) {
+    public static RandomRequest GenerateRequest(int client_id, String postcode) {
         CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> requestSchema = Schema.of(
