@@ -5,8 +5,6 @@ import net.datafaker.transformations.Field;
 import net.datafaker.transformations.JavaObjectTransformer;
 import net.datafaker.transformations.Schema;
 
-import static net.datafaker.transformations.Field.field;
-
 public class RandomUser {
     public static final String TABLE = "user";
     public static int CURRENT_USER_ID = 1;
@@ -21,7 +19,7 @@ public class RandomUser {
 
     public RandomUser() {}
 
-    public static RandomUser GenerateUser() {
+    public static RandomUser generate() {
         Faker faker = new Faker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> userSchema= Schema.of(

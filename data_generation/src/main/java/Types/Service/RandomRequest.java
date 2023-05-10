@@ -46,3 +46,4 @@ public class RandomRequest {
         return (RandomRequest) transfomer.apply(RandomRequest.class, requestSchema);
     }
 }
+

@@ -14,7 +14,7 @@ public class RandomClient {
 
     public RandomClient() {}
 
-    public static RandomClient GenerateClient(int user_id) {
+    public static RandomClient generate(int user_id) {
         Faker faker = new Faker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
         Schema<Object, ?> clientSchema = Schema.of(
