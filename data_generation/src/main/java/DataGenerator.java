@@ -1,9 +1,11 @@
 import Types.Service.RandomRequest;
+import Types.Service.RandomRequestBid;
 import Types.User.*;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -16,6 +18,7 @@ public class DataGenerator {
     private ArrayList<RandomClient> randomClients;
     private ArrayList<RandomProfessional> randomProfessionals;
     private ArrayList<RandomRequest> randomRequests;
+    private ArrayList<RandomRequestBid> randomRequestBid;
 
     private int numberOfUsers;
     private int numberOfRequests;
@@ -27,6 +30,7 @@ public class DataGenerator {
         this.randomClients = new ArrayList<>();
         this.randomProfessionals = new ArrayList<>();
         this.randomRequests = new ArrayList<>();
+        this.randomRequestBid = new ArrayList<>();
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
     }
@@ -83,7 +87,19 @@ public class DataGenerator {
             randomRequests.add(RandomRequest.GenerateRequest(client.client_id, postcode));
         }
 
-        // assign professional to a request based on request status
+        // assign generate requestBids based on request status
+        randomRequests.forEach(request -> {
+            if (request.request_status_id <= 2) {
+                var applicableProfessionals = new ArrayList<RandomProfessional>();
+                randomProfessionals.forEach(professional -> {
+                    if (professional.services.stream().anyMatch(service -> service.service_id == request.service_id)) {
+                        applicableProfessionals.add(professional);
+                    }
+                });
+
+                applicableProfessionals.forEach(professional -> randomRequestBid.add(RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id)));
+            }
+        });
     }
 
     // based of number of completed requests
