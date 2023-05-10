@@ -1,11 +1,105 @@
 en:
   faker:
-    service_request:
-      requested_actions:
-        - "Install"
-        - "Upgrade"
-        - "Remove"
-        - "Fix"
-      target_status:
-        - "New"
-        - "Damaged"
+    request:
+      description:
+        greeting:
+          - "Hello! Currently I have an issues with my"
+          - "Good Morning! There is an issue with the"
+          - "To whom this may concern, I have discovered an issue with my"
+          - "This morning I started having trouble with the"
+          - "I am not sure what is going on, but we are having trouble with the"
+          - "Good Afternoon! I have found an issue with the"
+          - "Hiya, there is a problem with our"
+          - "Bonjour sir/madam. The partner and I figured it would be best to get a professional to sort out the issue with the"
+          - "Help me! Problem with the"
+          - "Ayyyyyye pro man or woman, help us with the"
+          - "Awh man looks like there is an issue with the"
+
+        urgency:
+          - "Can this please be fixed ASAP!?"
+          - "Look forward to hearing from you."
+          - "Can we please have this sorted quickly?"
+          - "I do not want to be rude, but could this please be looked at with haste?"
+          - "If someone could look at this quickly I would be grateful!"
+          - "No rush on the issue."
+          - "Really wanna get this one fixed before my partner returns from their trip..."
+          - "Help me if my partner sees this and confirms they were right. This one might be bad haha..."
+          - "Gotta get this one done quick, interest rates are going right up might run out of funds soon!"
+
+        tree:
+          - "tree, it is leaning. Really badly so..."
+          - "tree, it has has fallen over. Tried to stop it though!"
+          - "tree, it has fallen on top of the house! Not the damn house!"
+          - "broken branch, it is hanging. Kinda looks like it might fall on the house uh..."
+          - "tree in the front yard. It is blocking our view of the coast."
+          - "front yard tree. My partner insisted that we plant a tree in the back yard. Now the council has complained
+            forcing us to remove the tree. I should never listened to my partner!!"
+          - "tree. Neighbour planted it actually and I hate it! Gotta get this thing removed."
+
+        roof:
+          - "tiles, some have cracked."
+          - "roof. There was a storm that has damaged the front facing side of our roof."
+          - "roof. There is a lot of debris on the roof, can't be bothered to clean it..."
+          - "roof. Tree recently fell on the roof, looks like there are branches that were stuck in the gutters."
+          - "roof... Plane, landed on the roof, could someone clean that one up?"
+          - "roof. Some kids egged my damn roof, ONLY THE ROOF!"
+
+        fence:
+          - "fence, it is leaning forward."
+          - "fence, it is leaning backwards."
+          - "fence. It's an old early 2000s wooden fence, one of the posts has been broken in half."
+          - "gate. Someone's (my son) car backed into the gate, now it won't shut properly."
+          - "side gate. Dog smashed the side gate in, someone did mention that the post was rotting and I guess I should
+             have listened..."
+          - "front gate. So I uh was revving the old project car and forgot I had put her into gear so I flew into the 
+          front gate...partner's not gonna be too happy about that one."
+
+        plumbing:
+          - "toilet. Looks like it's backed up."
+          - "sink. Looks like it's clogged."
+          - "shower. Looks like it's clogged."
+          - "toilet. My youngest son thought it would be funny to flush his GI Joes down the damn toliet. Some sort of a 
+          undercover missing? I am not sure that kid is mine to be honest with you."
+          - "shower. My partner insists that the hair clogging up the shower is not hers. I am convinced she is half big foot"
+          - "shower. My daughter thought it would be a good idea some sort of make up cleaner down the drain. The pipes are
+          corroding now!"
+
+        oven:
+          - "Oven. Son thought it would be a neat experiment to leave a firecracker in there to see if the oven would make
+          it explode... well it did!"
+          - "Oven. It is not turning on seems like, and yes I did try turning it off and on again!"
+          - "Oven. Something weird is going on, it's cooling my food!"
+          - "Oven. It smells funny, might be from baking the 3D prints..."
+          - "Oven. All the knobs fell off so I can't make my damn pizza!"
+          - "Oven. Got no clue what is going on."
+          - "Oven. Partner tried to fix it, now it's smoking. Didn't want a smoker makes me feel bad I just quit 3 weeks ago."
+
+      review:
+        good:
+          - "This was an amazing service, I would definitely hire this person again!"
+          - "What a service, no reason not to hire this person"
+          - "Wow what a great service, some minor things, but were fixed up ASAP as pointed out"
+          - "Very friendly, very knowledgeable as well."
+          - "Great quality service, no issues with the professional as well"
+          - "Why would I hire anyone else for this issue"
+
+        fair:
+          - "Was an ok service, left something to be desired"
+          - "Wished there were some things they did differently"
+          - "Quality was okay but definitely could have a better attitude"
+          - "I am not sure if I would hire this person again"
+          - "It was a meh service, not good, not bad"
+          - "They showed up, they left, it was eh"
+          - "Service was good, wasn't an amazing experience but no real grievances against the traide"
+          - "Ok/Good service"
+          - "No real complaints, it was an okay service"
+          - "Could do a bit better, had okay manners but not the best"
+          - "Sigh, could have been better."
+
+        bad:
+          - "Awful service, I don't think I would hire this person again"
+          - "Absolutely terrible, no manners, no skills all garbage"
+          - "Why oh why oh why did I hire this person. DO NOT HIRE"
+          - "Jeez man that was one awful service..."
+          - "NEVER AGAIN!!!!"
+          - "Yikes!!! Surely you could do better? Some better manners would be nice!"
