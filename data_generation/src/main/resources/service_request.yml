@@ -73,3 +73,33 @@ en:
           - "Oven. All the knobs fell off so I can't make my damn pizza!"
           - "Oven. Got no clue what is going on."
           - "Oven. Partner tried to fix it, now it's smoking. Didn't want a smoker makes me feel bad I just quit 3 weeks ago."
+
+      review:
+        good:
+          - "This was an amazing service, I would definitely hire this person again!"
+          - "What a service, no reason not to hire this person"
+          - "Wow what a great service, some minor things, but were fixed up ASAP as pointed out"
+          - "Very friendly, very knowledgeable as well."
+          - "Great quality service, no issues with the professional as well"
+          - "Why would I hire anyone else for this issue"
+
+        fair:
+          - "Was an ok service, left something to be desired"
+          - "Wished there were some things they did differently"
+          - "Quality was okay but definitely could have a better attitude"
+          - "I am not sure if I would hire this person again"
+          - "It was a meh service, not good, not bad"
+          - "They showed up, they left, it was eh"
+          - "Service was good, wasn't an amazing experience but no real grievances against the traide"
+          - "Ok/Good service"
+          - "No real complaints, it was an okay service"
+          - "Could do a bit better, had okay manners but not the best"
+          - "Sigh, could have been better."
+
+        bad:
+          - "Awful service, I don't think I would hire this person again"
+          - "Absolutely terrible, no manners, no skills all garbage"
+          - "Why oh why oh why did I hire this person. DO NOT HIRE"
+          - "Jeez man that was one awful service..."
+          - "NEVER AGAIN!!!!"
+          - "Yikes!!! Surely you could do better? Some better manners would be nice!"

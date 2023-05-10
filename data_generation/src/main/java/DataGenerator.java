@@ -32,9 +32,14 @@ public class DataGenerator {
     }
 
     public void GenerateData() {
-
         this.GenerateUsers(numberOfUsers);
         this.GenerateRequests(numberOfRequests);
+
+        SqlGenerator<RandomUser> users = new SqlGenerator<>(randomUsers, RandomUser.TABLE);
+        SqlGenerator<RandomClient> clients = new SqlGenerator<>(randomClients, RandomClient.TABLE);
+        System.out.println(users.GenerateScript());
+        System.out.println();
+        System.out.println(clients.GenerateScript());
     }
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
@@ -70,7 +75,7 @@ public class DataGenerator {
             RandomClient client = randomClients.get(random.nextInt(randomClients.size() - 1) + 1);
 
             // find associated random user and match to generated address
-            int user_id = randomUsers.get(client.user_id).user_id;
+            int user_id = randomUsers.get(client.user_id - 1).user_id;
             String postcode = String.valueOf(randomAddresses.stream().filter(address -> address.user_id == user_id)
                     .findFirst());
 
@@ -78,9 +83,7 @@ public class DataGenerator {
             randomRequests.add(RandomRequest.GenerateRequest(client.client_id, postcode));
         }
 
-        SqlGenerator<RandomRequest> generator = new SqlGenerator<>(randomRequests, RandomRequest.TABLE);
-        System.out.println(generator.GenerateScript());
-
+        // assign professional to a request based on request status
     }
 
     // based of number of completed requests

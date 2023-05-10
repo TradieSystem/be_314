@@ -9,4 +9,8 @@ public class RequestBid {
     public float amount;
     public Date sent_date;
     public int bid_status_id;
+
+    public static RequestBid generateRequestBid(int request_id, int professional_id) {
+        
+    }
 }

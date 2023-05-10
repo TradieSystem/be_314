@@ -35,41 +35,41 @@ public class CustomFaker extends BaseFaker {
             }
 
             public String tree() {
-                String greeting = resolve(KEY + ".description" + ".greeting");
-                String issue = resolve(KEY + ".description" + ".tree");
-                String urgency = resolve(KEY +  ".description" + ".urgency");
+                String greeting = resolve(KEY + ".description.greeting");
+                String issue = resolve(KEY + ".description.tree");
+                String urgency = resolve(KEY +  ".description.urgency");
 
                 return String.format("%s %s %s", greeting, issue, urgency);
             }
 
             public String roof() {
-                String greeting = resolve(KEY + ".description" + ".greeting");
-                String issue = resolve(KEY + ".description" + ".roof");
-                String urgency = resolve(KEY +  ".description" + ".urgency");
+                String greeting = resolve(KEY + ".description.greeting");
+                String issue = resolve(KEY + ".description.roof");
+                String urgency = resolve(KEY +  ".description.urgency");
 
                 return String.format("%s %s %s", greeting, issue, urgency);
             }
 
             public String fence() {
-                String greeting = resolve(KEY + ".description" + ".greeting");
-                String issue = resolve(KEY + ".description" + ".fence");
-                String urgency = resolve(KEY +  ".description" + ".urgency");
+                String greeting = resolve(KEY + ".description.greeting");
+                String issue = resolve(KEY + ".description.fence");
+                String urgency = resolve(KEY +  ".description.urgency");
 
                 return String.format("%s %s %s", greeting, issue, urgency);
             }
 
             public String plumbing() {
-                String greeting = resolve(KEY + ".description" + ".greeting");
-                String issue = resolve(KEY + ".description" + ".plumbing");
-                String urgency = resolve(KEY +  ".description" + ".urgency");
+                String greeting = resolve(KEY + ".description.greeting");
+                String issue = resolve(KEY + ".description.plumbing");
+                String urgency = resolve(KEY +  ".description.urgency");
 
                 return String.format("%s %s %s", greeting, issue, urgency);
             }
 
             public String oven() {
-                String greeting = resolve(KEY + ".description" + ".greeting");
-                String issue = resolve(KEY + ".description" + ".oven");
-                String urgency = resolve(KEY +  ".description" + ".urgency");
+                String greeting = resolve(KEY + ".description.greeting");
+                String issue = resolve(KEY + ".description.oven");
+                String urgency = resolve(KEY +  ".description.urgency");
 
                 return String.format("%s %s %s", greeting, issue, urgency);
             }
@@ -81,15 +81,15 @@ public class CustomFaker extends BaseFaker {
             }
 
             public String good() {
-                return resolve(KEY + ".good_review");
+                return resolve(KEY + ".review.good");
             }
 
             public String fair() {
-                return resolve(KEY + ".fair_review");
+                return resolve(KEY + ".review.fair");
             }
 
             public String bad() {
-                return resolve(KEY + ".bad_review");
+                return resolve(KEY + ".review.bad");
             }
         }
     }
