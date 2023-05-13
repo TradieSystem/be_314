@@ -1,3 +1,5 @@
+import Types.User.RandomClient;
+
 import java.lang.reflect.Field;
 
 import java.lang.reflect.Modifier;
@@ -18,7 +20,7 @@ public class SqlGenerator<T> {
         }
         this.table = tempTableName;
     }
-    
+
     public String getTableName() {
         return this.table;
     }

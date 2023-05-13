@@ -1,9 +1,15 @@
 package Types.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import Provider.CustomFaker;
 import Types.User.RandomProfessional;
+import Types.User.RandomUserQuestion;
 import net.datafaker.Faker;
+import net.datafaker.transformations.Field;
+import net.datafaker.transformations.JavaObjectTransformer;
+import net.datafaker.transformations.Schema;
 
 
 public class RandomAssociatedService {
@@ -19,6 +25,7 @@ public class RandomAssociatedService {
     }
     
     public static RandomAssociatedService generate(RandomProfessional randomProfessional, List<Service> availableServices) {
+        /*
         RandomAssociatedService entity = new RandomAssociatedService();
         entity.provided_service_id = CURRENT_ID++;
         Faker faker = new Faker();
@@ -29,6 +36,18 @@ public class RandomAssociatedService {
         entity.service_id=sq.id;
         entity.professional_id = randomProfessional.professional_id;
         return entity;
+         */
+
+        CustomFaker faker = new CustomFaker();
+        JavaObjectTransformer transfomer = new JavaObjectTransformer();
+
+        Schema<Object, ?> associatedServiceSchema = Schema.of(
+                Field.field("provided_service_id", () -> RandomUserQuestion.CURRENT_ID++),
+                Field.field("service_id", () -> faker.random().nextInt(1, availableServices.size())),
+                Field.field("professional_id", () -> randomProfessional.professional_id)
+        );
+
+        return (RandomAssociatedService) transfomer.apply(RandomAssociatedService.class, associatedServiceSchema);
     }    
 
     public static int getRandomInt(int min, int max) {

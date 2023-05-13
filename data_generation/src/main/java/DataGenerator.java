@@ -1,10 +1,22 @@
 import Types.Service.RandomAssociatedService;
+import Types.Service.RandomRequest;
 import Types.Service.RandomTransaction;
 import Types.Service.Service;
 import Types.User.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import Types.Service.RandomRequest;
+import Types.Service.RandomRequestBid;
+import Types.User.*;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Random;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 
 public class DataGenerator {
     // user information
@@ -18,30 +30,8 @@ public class DataGenerator {
     private final ArrayList<RandomAuthorisation> randomAuthorisations;
     private final ArrayList<RandomSession> randomSessions;
     private final ArrayList<RandomTransaction> randomTransactions;
-    
-import Types.Service.RandomRequest;
-import Types.Service.RandomRequestBid;
-import Types.User.*;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.Random;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
-
-public class DataGenerator {
-    // user information
-    private ArrayList<RandomUser> randomUsers;
-    private ArrayList<RandomAddress> randomAddresses;
-    private ArrayList<RandomBilling> randomBillings;
-    private ArrayList<RandomClient> randomClients;
-    private ArrayList<RandomProfessional> randomProfessionals;
-    private ArrayList<RandomRequest> randomRequests;
-    private ArrayList<RandomRequestBid> randomRequestBid;
-
-
+    private final ArrayList<RandomRequest> randomRequests;
+    private final ArrayList<RandomRequestBid> randomRequestBids;
     private int numberOfUsers;
     private int numberOfRequests;
 
@@ -58,7 +48,7 @@ public class DataGenerator {
         this.randomSessions= new ArrayList<>();
         this.randomTransactions= new ArrayList<>();
         this.randomRequests = new ArrayList<>();
-        this.randomRequestBid = new ArrayList<>();
+        this.randomRequestBids = new ArrayList<>();
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
     }
@@ -67,11 +57,17 @@ public class DataGenerator {
         this.GenerateUsers(numberOfUsers);
         this.GenerateRequests(numberOfRequests);
 
-        SqlGenerator<RandomUser> users = new SqlGenerator<>(randomUsers, RandomUser.TABLE);
-        SqlGenerator<RandomClient> clients = new SqlGenerator<>(randomClients, RandomClient.TABLE);
-        System.out.println(users.GenerateScript());
+        SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, randomUsers);
+        SqlGenerator<RandomClient> clients = new SqlGenerator<>(RandomClient.class, randomClients);
+        SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, randomProfessionals);
+        SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, randomRequests);
+        System.out.println(users.generateScript());
         System.out.println();
-        System.out.println(clients.GenerateScript());
+        System.out.println(clients.generateScript());
+        System.out.println();
+        System.out.println(professionals.generateScript());
+        System.out.println();
+        System.out.println(requests.generateScript());
     }
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
@@ -147,14 +143,13 @@ public class DataGenerator {
         // assign generate requestBids based on request status
         randomRequests.forEach(request -> {
             if (request.request_status_id <= 2) {
-                var applicableProfessionals = new ArrayList<RandomProfessional>();
                 randomProfessionals.forEach(professional -> {
-                    if (professional.services.stream().anyMatch(service -> service.service_id == request.service_id)) {
-                        applicableProfessionals.add(professional);
-                    }
+                    randomAssociatedServices.forEach(associatedService -> {
+                        if (associatedService.service_id == request.service_id) {
+                            randomRequestBids.add(RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id));
+                        }
+                    });
                 });
-
-                applicableProfessionals.forEach(professional -> randomRequestBid.add(RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id)));
             }
         });
     }

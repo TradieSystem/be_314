@@ -13,7 +13,7 @@ public class RandomRequestBid {
     public int request_bid_id;
     public int request_id;
     public int professional_id;
-    public float amount;
+    public double amount;
     public Date sent_date;
     public int bid_status_id;
 
