@@ -39,7 +39,19 @@ def userLogin():
 
 
 @user_blueprint.get("/{}/resetPassword".format(user_base))
-def userResetPassword():
+def userResetPasswordGet():
+    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
+
+
+@user_blueprint.post("/{}/resetPassword".format(user_base))
+def userResetPasswordPost():
+    result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
+    return result
+
+
+@user_blueprint.put("/{}/resetPassword".format(user_base))
+def userResetPasswordPut():
     result = Security_Controller.Event_Start(Request_Construct.construct_request(request))
     return result
 
