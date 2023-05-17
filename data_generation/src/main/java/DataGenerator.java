@@ -1,7 +1,4 @@
-import Types.Service.RandomAssociatedService;
-import Types.Service.RandomRequest;
-import Types.Service.RandomTransaction;
-import Types.Service.Service;
+import Types.Service.*;
 import Types.User.*;
 
 import java.io.FileWriter;
@@ -10,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import Types.Service.RandomRequestBid;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -31,6 +26,7 @@ public class DataGenerator {
     private final ArrayList<RandomTransaction> randomTransactions;
     private final ArrayList<RandomRequest> randomRequests;
     private final ArrayList<RandomRequestBid> randomRequestBids;
+    private final ArrayList<RandomReview> randomReviews;
     private int numberOfUsers;
     private int numberOfRequests;
 
@@ -48,6 +44,7 @@ public class DataGenerator {
         this.randomTransactions= new ArrayList<>();
         this.randomRequests = new ArrayList<>();
         this.randomRequestBids = new ArrayList<>();
+        this.randomReviews =  new ArrayList<>();
         this.numberOfUsers = numberOfUsers;
         this.numberOfRequests = numberOfRequests;
     }
@@ -65,6 +62,7 @@ public class DataGenerator {
         SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, randomProfessionals);
         SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, randomRequests);
         SqlGenerator<RandomRequestBid> requestBids = new SqlGenerator<>(RandomRequestBid.class, randomRequestBids);
+        SqlGenerator<RandomReview> reviews = new SqlGenerator<>(RandomReview.class, randomReviews);
 
         String file = "USE Project;\n";
         file += users.generateScript();
@@ -76,7 +74,9 @@ public class DataGenerator {
         file += professionals.generateScript();
         file += requests.generateScript();
         file += requestBids.generateScript();
+        file += reviews.generateScript();
 
+        // replace 'null' with null
         file = file.replace("'null'", "null");
 
         // create sql file
@@ -204,6 +204,10 @@ public class DataGenerator {
                 // change request status based on request bid
                 if (request_bid.bid_status_id == 2) request.professional_id = professional.professional_id;
             });
+
+            if (request.request_status_id == 3 || request.request_status_id == 4) {
+                randomReviews.add(RandomReview.generateReview(request.request_id));
+            }
         });
     }
 

@@ -39,7 +39,7 @@ en:
         roof:
           - "tiles, some have cracked."
           - "roof. There was a storm that has damaged the front facing side of our roof."
-          - "roof. There is a lot of debris on the roof, can't be bothered to clean it..."
+          - "roof. There is a lot of debris on the roof, cant be bothered to clean it..."
           - "roof. Tree recently fell on the roof, looks like there are branches that were stuck in the gutters."
           - "roof... Plane, landed on the roof, could someone clean that one up?"
           - "roof. Some kids egged my damn roof, ONLY THE ROOF!"
@@ -47,17 +47,17 @@ en:
         fence:
           - "fence, it is leaning forward."
           - "fence, it is leaning backwards."
-          - "fence. It's an old early 2000s wooden fence, one of the posts has been broken in half."
-          - "gate. Someone's (my son) car backed into the gate, now it won't shut properly."
+          - "fence. Its an old early 2000s wooden fence, one of the posts has been broken in half."
+          - "gate. Someones (my son) car backed into the gate, now it wont shut properly."
           - "side gate. Dog smashed the side gate in, someone did mention that the post was rotting and I guess I should
              have listened..."
           - "front gate. So I uh was revving the old project car and forgot I had put her into gear so I flew into the 
-          front gate...partner's not gonna be too happy about that one."
+          front gate...partners not gonna be too happy about that one."
 
         plumbing:
-          - "toilet. Looks like it's backed up."
-          - "sink. Looks like it's clogged."
-          - "shower. Looks like it's clogged."
+          - "toilet. Looks like its backed up."
+          - "sink. Looks like its clogged."
+          - "shower. Looks like its clogged."
           - "toilet. My youngest son thought it would be funny to flush his GI Joes down the damn toliet. Some sort of a 
           undercover missing? I am not sure that kid is mine to be honest with you."
           - "shower. My partner insists that the hair clogging up the shower is not hers. I am convinced she is half big foot"
@@ -68,11 +68,11 @@ en:
           - "Oven. Son thought it would be a neat experiment to leave a firecracker in there to see if the oven would make
           it explode... well it did!"
           - "Oven. It is not turning on seems like, and yes I did try turning it off and on again!"
-          - "Oven. Something weird is going on, it's cooling my food!"
+          - "Oven. Something weird is going on, its cooling my food!"
           - "Oven. It smells funny, might be from baking the 3D prints..."
-          - "Oven. All the knobs fell off so I can't make my damn pizza!"
+          - "Oven. All the knobs fell off so I cant make my damn pizza!"
           - "Oven. Got no clue what is going on."
-          - "Oven. Partner tried to fix it, now it's smoking. Didn't want a smoker makes me feel bad I just quit 3 weeks ago."
+          - "Oven. Partner tried to fix it, now its smoking. Didnt want a smoker makes me feel bad I just quit 3 weeks ago."
 
       review:
         good:
@@ -90,14 +90,14 @@ en:
           - "I am not sure if I would hire this person again"
           - "It was a meh service, not good, not bad"
           - "They showed up, they left, it was eh"
-          - "Service was good, wasn't an amazing experience but no real grievances against the traide"
+          - "Service was good, wasnt an amazing experience but no real grievances against the traide"
           - "Ok/Good service"
           - "No real complaints, it was an okay service"
           - "Could do a bit better, had okay manners but not the best"
           - "Sigh, could have been better."
 
         bad:
-          - "Awful service, I don't think I would hire this person again"
+          - "Awful service, I dont think I would hire this person again"
           - "Absolutely terrible, no manners, no skills all garbage"
           - "Why oh why oh why did I hire this person. DO NOT HIRE"
           - "Jeez man that was one awful service..."

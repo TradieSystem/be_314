@@ -14,6 +14,7 @@ import net.datafaker.transformations.Schema;
 public class RandomUserQuestion {
  
     public static final String TABLE = "user_question";
+    public static int secuirty_question_id = 0;
     public static int CURRENT_ID = 1;
     
     public int user_question_id;
@@ -38,10 +39,12 @@ public class RandomUserQuestion {
         CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
 
+        int securityQuestionId = secuirty_question_id <= 3 ? ++secuirty_question_id : (secuirty_question_id = 1);
+
         Schema<Object, ?> userQuestionSchema = Schema.of(
                 Field.field("user_question_id", () -> RandomUserQuestion.CURRENT_ID++),
                 Field.field("user_id", () -> user.user_id),
-                Field.field("security_question_id", () -> faker.random().nextInt(1, availableQuestions.size())),
+                Field.field("security_question_id", () -> securityQuestionId),
                 Field.field("answer", () -> faker.funnyName().name().replace("\'",""))
         );
 
