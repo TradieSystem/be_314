@@ -57,6 +57,9 @@ public class DataGenerator {
         this.GenerateRequests(numberOfRequests);
 
         SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, randomUsers);
+        SqlGenerator<RandomUserQuestion> questions = new SqlGenerator<>(RandomUserQuestion.class, randomUserQuestions);
+        SqlGenerator<RandomAuthorisation> authorisations = new SqlGenerator<>(RandomAuthorisation.class, randomAuthorisations);
+        SqlGenerator<RandomSession> sessions = new SqlGenerator<>(RandomSession.class, randomSessions);
         SqlGenerator<RandomAddress> addresses = new SqlGenerator<>(RandomAddress.class, randomAddresses);
         SqlGenerator<RandomClient> clients = new SqlGenerator<>(RandomClient.class, randomClients);
         SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, randomProfessionals);
@@ -65,6 +68,9 @@ public class DataGenerator {
 
         String file = "USE Project;\n";
         file += users.generateScript();
+        file += questions.generateScript();
+        file += authorisations.generateScript();
+        file += sessions.generateScript();
         file += addresses.generateScript();
         file += clients.generateScript();
         file += professionals.generateScript();

@@ -41,7 +41,7 @@ public class RandomAddress {
         Schema<Object, ?> addressSchema = Schema.of(
                 Field.field("address_id", () -> RandomAddress.CURRENT_ID++),
                 Field.field("street_number", () -> faker.random().nextInt(1,200)),
-                Field.field("street_name", () -> faker.address().streetName()),
+                Field.field("street_name", () -> faker.address().streetName().replace("\'","")),
                 Field.field("suburb", () ->  randomSuburb.suburb),
                 Field.field("postcode", () -> randomSuburb.postcode),
                 Field.field("user_id", () -> user_id)

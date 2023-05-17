@@ -42,7 +42,7 @@ public class RandomUserQuestion {
                 Field.field("user_question_id", () -> RandomUserQuestion.CURRENT_ID++),
                 Field.field("user_id", () -> user.user_id),
                 Field.field("security_question_id", () -> faker.random().nextInt(1, availableQuestions.size())),
-                Field.field("answer", () -> faker.funnyName().name())
+                Field.field("answer", () -> faker.funnyName().name().replace("\'",""))
         );
 
         return (RandomUserQuestion) transfomer.apply(RandomUserQuestion.class, userQuestionSchema);

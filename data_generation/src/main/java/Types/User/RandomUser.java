@@ -47,8 +47,8 @@ public class RandomUser {
         StringBuilder finalPassword = password;
         Schema<Object, ?> userSchema= Schema.of(
                 Field.field("user_id", () -> RandomUser.CURRENT_USER_ID++),
-                Field.field("first_name", () -> faker.name().firstName()),
-                Field.field("last_name", () -> faker.name().lastName()),
+                Field.field("first_name", () -> faker.name().firstName().replace("\'","")),
+                Field.field("last_name", () -> faker.name().lastName().replace("\'","")),
                 Field.field("email_address", () -> faker.name().username() + "@outlook.com"),
                 Field.field("mobile", () -> faker.phoneNumber().phoneNumberNational()),
                 Field.field("password", finalPassword::toString)
