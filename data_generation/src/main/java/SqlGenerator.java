@@ -31,7 +31,7 @@ public class SqlGenerator<T> {
     
     public String generateScript() {
         final StringBuilder body = new StringBuilder();
-        body.append(String.format("ALTER TABLE %s AUTO_INCREMENT = 1\n\n", table));
+        body.append(String.format("\nALTER TABLE %s AUTO_INCREMENT = 1;\n\n", table));
         
         for (int i = 0; i < this.items.size(); i++) {
             try {

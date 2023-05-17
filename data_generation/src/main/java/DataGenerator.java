@@ -3,20 +3,19 @@ import Types.Service.RandomRequest;
 import Types.Service.RandomTransaction;
 import Types.Service.Service;
 import Types.User.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import Types.Service.RandomRequest;
+
 import Types.Service.RandomRequestBid;
-import Types.User.*;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
+
 import java.util.Objects;
-import java.util.Random;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import static java.util.stream.Collectors.toList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DataGenerator {
     // user information
@@ -58,17 +57,32 @@ public class DataGenerator {
         this.GenerateRequests(numberOfRequests);
 
         SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, randomUsers);
+        SqlGenerator<RandomAddress> addresses = new SqlGenerator<>(RandomAddress.class, randomAddresses);
         SqlGenerator<RandomClient> clients = new SqlGenerator<>(RandomClient.class, randomClients);
         SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, randomProfessionals);
         SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, randomRequests);
-        System.out.println(users.generateScript());
-        System.out.println();
-        System.out.println(clients.generateScript());
-        System.out.println();
-        System.out.println(professionals.generateScript());
-        System.out.println();
-        System.out.println(requests.generateScript());
+        SqlGenerator<RandomRequestBid> requestBids = new SqlGenerator<>(RandomRequestBid.class, randomRequestBids);
+
+        String file = "USE Project;\n";
+        file += users.generateScript();
+        file += addresses.generateScript();
+        file += clients.generateScript();
+        file += professionals.generateScript();
+        file += requests.generateScript();
+        file += requestBids.generateScript();
+
+        file = file.replace("'null'", "null");
+
+        // create sql file
+        try {
+            FileWriter outFile = new FileWriter("src\\..\\..\\data.sql");
+            outFile.write(file);
+            outFile.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     // can remove, but for readability might be good to keep
     private void GenerateUsers(int numberOfUsers) {
         // generate random users
@@ -133,24 +147,57 @@ public class DataGenerator {
 
             // find associated random user and match to generated address
             int user_id = randomUsers.get(client.user_id - 1).user_id;
-            String postcode = String.valueOf(randomAddresses.stream().filter(address -> address.user_id == user_id)
-                    .findFirst());
+            AtomicReference<String> postcode = new AtomicReference<>("");
+            //String.valueOf(randomAddresses.stream().filter(address -> address.user_id == user_id)
+            //                    .findFirst())
+            randomAddresses.forEach(randomAddress -> { if (randomAddress.user_id == user_id) postcode.set(randomAddress.postcode); });
 
             // pass client_id and calculated postcode and add randomly generated client to ArrayList
-            randomRequests.add(RandomRequest.GenerateRequest(client.client_id, postcode));
+            randomRequests.add(RandomRequest.GenerateRequest(client.client_id, postcode.get()));
         }
 
-        // assign generate requestBids based on request status
+        // generate request bids for requests
         randomRequests.forEach(request -> {
-            if (request.request_status_id <= 2) {
-                randomProfessionals.forEach(professional -> {
-                    randomAssociatedServices.forEach(associatedService -> {
-                        if (associatedService.service_id == request.service_id) {
-                            randomRequestBids.add(RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id));
-                        }
-                    });
+            // iterate through addresses and find matching users to postcode
+            var applicableUsers = new ArrayList<RandomUser>();
+            randomAddresses.forEach(address -> {
+                if (Objects.equals(address.postcode, request.postcode)) {
+                    randomUsers.forEach(user -> { if (user.user_id == address.user_id) applicableUsers.add(user); });
+                }
+            });
+
+            // check if user is a professional
+            var professionals = new ArrayList<RandomProfessional>();
+            applicableUsers.forEach(applicableUser -> {
+                randomProfessionals.forEach(randomProfessional -> {
+                    // find associated professional
+                    if (applicableUser.user_id == randomProfessional.user_id) {
+                        // find associated services for professional and check against request
+                        var associatedServices = new ArrayList<RandomAssociatedService>();
+                        randomAssociatedServices.forEach(randomAssociatedService -> {
+                            if (randomAssociatedService.professional_id == randomProfessional.professional_id) associatedServices.add(randomAssociatedService);
+                        });
+
+                        // if the associated services match request service then add to professional list for request bid generation
+                        associatedServices.forEach(associatedService -> {
+                            if (associatedService.service_id == request.service_id) professionals.add(randomProfessional);
+                        });
+                    }
                 });
-            }
+            });
+
+            AtomicBoolean approved = new AtomicBoolean(false);
+            professionals.forEach(professional -> {
+                // generate request bid
+                var request_bid = RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id, approved.get());
+
+                if (request_bid.bid_status_id == 2) approved.set(true);
+
+                randomRequestBids.add(request_bid);
+
+                // change request status based on request bid
+                if (request_bid.bid_status_id == 2) request.professional_id = professional.professional_id;
+            });
         });
     }
 

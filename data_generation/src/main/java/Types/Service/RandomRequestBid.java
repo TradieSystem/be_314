@@ -17,7 +17,7 @@ public class RandomRequestBid {
     public Date sent_date;
     public int bid_status_id;
 
-    public static RandomRequestBid generateRequestBid(int request_id, int professional_id) {
+    public static RandomRequestBid generateRequestBid(int request_id, int professional_id, boolean approved) {
         CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
 
@@ -27,7 +27,7 @@ public class RandomRequestBid {
                 Field.field("professional_id", () -> professional_id),
                 Field.field("amount", () -> faker.random().nextDouble(10,200)),
                 Field.field("sent_date", () -> faker.date().future(30, TimeUnit.DAYS)),
-                Field.field("bid_status_id", () -> faker.random().nextInt(1,3))
+                Field.field("bid_status_id", () -> !approved ? faker.random().nextInt(1,3) : 3)
         );
 
         return (RandomRequestBid) transfomer.apply(RandomRequestBid.class, requestBidSchema);

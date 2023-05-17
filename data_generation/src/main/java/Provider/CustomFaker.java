@@ -11,6 +11,9 @@ public class CustomFaker extends BaseFaker {
     public Request request() {
         return getProvider(Request.class, Request::new, this);
     }
+    public User user() {
+        return getProvider(User.class, User::new, this);
+    }
 
     public static class Request extends AbstractProvider<BaseProviders> {
         private static final String KEY = "request";
@@ -90,6 +93,29 @@ public class CustomFaker extends BaseFaker {
 
             public String bad() {
                 return resolve(KEY + ".review.bad");
+            }
+        }
+    }
+
+    public static class User extends AbstractProvider<BaseProviders> {
+        private static final String KEY = "user";
+
+        protected User(BaseProviders faker) {
+            super(faker);
+            faker.addPath(Locale.ENGLISH, Paths.get("src\\main\\resources\\user.yml"));
+        }
+
+        public Suburb suburb() {
+            return new Suburb(resolve(KEY + ".suburb"));
+        }
+
+        public static class Suburb {
+            public String suburb;
+            public String postcode;
+
+            protected Suburb(String yml_row) {
+                this.suburb = yml_row.split(":")[0];
+                this.postcode = yml_row.split(":")[1];
             }
         }
     }

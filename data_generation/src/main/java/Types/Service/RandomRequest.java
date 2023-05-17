@@ -36,11 +36,11 @@ public class RandomRequest {
                 Field.field("request_id", () -> RandomRequest.CURRENT_REQUEST_ID++),
                 Field.field("request_date", () -> faker.date().future(30, TimeUnit.DAYS)),
                 Field.field("instruction", () -> faker.request().description().tree()),
-                Field.field("postcode", () -> faker.regexify("[1-3]{1}[0-9]{1}[0-9]{1}[0-9]{1}")),
+                Field.field("postcode", () -> postcode),
                 Field.field("client_id", () -> client_id),
                 Field.field("professional_id", () -> null),
                 Field.field("service_id", () -> faker.random().nextInt(1,5)), // first service_id is 1 and last is 5
-                Field.field("request_status_id", () -> faker.random().nextInt(1,5))  // first status_id is 1 and last is 5
+                Field.field("request_status_id", () -> faker.random().nextInt(1,4))  // first status_id is 1 and last is 5
         );
 
         return (RandomRequest) transfomer.apply(RandomRequest.class, requestSchema);
