@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a6f90a5-733a-4c4d-b3f3-7590ee24b009" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/user.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Provider/CustomFaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Provider/CustomFaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SqlGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SqlGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/Service/RandomRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/Service/RandomRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/Service/RandomRequestBid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/Service/RandomRequestBid.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomAddress.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/database/330_insert_request_status.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../src/database/330_insert_request_status.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

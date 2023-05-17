@@ -31,7 +31,8 @@ public class RandomUser {
         StringBuilder password = new StringBuilder();
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(faker.regexify("[a-zA-Z0-9_.!@#$%^&*()]{14,16}").getBytes());
+            md.update("MyPassword1!".getBytes());
+            //faker.regexify("[a-zA-Z0-9_.!@#$%^&*()]{14,16}")
             byte[] digest = md.digest();
             BigInteger integer = new BigInteger(1, digest);
             password = new StringBuilder(integer.toString(16));
