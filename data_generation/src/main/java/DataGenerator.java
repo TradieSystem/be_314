@@ -10,6 +10,7 @@ import java.util.Random;
 
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class DataGenerator {
@@ -54,6 +55,7 @@ public class DataGenerator {
         this.GenerateRequests(numberOfRequests);
 
         SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, randomUsers);
+        SqlGenerator<RandomBilling> billings = new SqlGenerator<>(RandomBilling.class, randomBillings);
         SqlGenerator<RandomUserQuestion> questions = new SqlGenerator<>(RandomUserQuestion.class, randomUserQuestions);
         SqlGenerator<RandomAuthorisation> authorisations = new SqlGenerator<>(RandomAuthorisation.class, randomAuthorisations);
         SqlGenerator<RandomSession> sessions = new SqlGenerator<>(RandomSession.class, randomSessions);
@@ -63,9 +65,11 @@ public class DataGenerator {
         SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, randomRequests);
         SqlGenerator<RandomRequestBid> requestBids = new SqlGenerator<>(RandomRequestBid.class, randomRequestBids);
         SqlGenerator<RandomReview> reviews = new SqlGenerator<>(RandomReview.class, randomReviews);
+        SqlGenerator<RandomTransaction> transactions = new SqlGenerator<>(RandomTransaction.class, randomTransactions);
 
         String file = "USE Project;\n";
         file += users.generateScript();
+        file += billings.generateScript();
         file += questions.generateScript();
         file += authorisations.generateScript();
         file += sessions.generateScript();
@@ -75,6 +79,7 @@ public class DataGenerator {
         file += requests.generateScript();
         file += requestBids.generateScript();
         file += reviews.generateScript();
+        file += transactions.generateScript();
 
         // replace 'null' with null
         file = file.replace("'null'", "null");
@@ -193,6 +198,7 @@ public class DataGenerator {
             });
 
             AtomicBoolean approved = new AtomicBoolean(false);
+            AtomicInteger bidCounter = new AtomicInteger();
             professionals.forEach(professional -> {
                 // generate request bid
                 var request_bid = RandomRequestBid.generateRequestBid(request.request_id, professional.professional_id, approved.get());
@@ -203,16 +209,31 @@ public class DataGenerator {
 
                 // change request status based on request bid
                 if (request_bid.bid_status_id == 2) request.professional_id = professional.professional_id;
+
+                bidCounter.getAndIncrement();
             });
 
-            if (request.request_status_id == 3 || request.request_status_id == 4) {
+            // if the request is completed or archived there must be a review and transaction record
+            if ((request.request_status_id == 3 || request.request_status_id == 4) && bidCounter.get() > 0) {
                 randomReviews.add(RandomReview.generateReview(request.request_id));
+
+                // fields for client transaction
+                AtomicInteger client_user_id = new AtomicInteger();
+                AtomicReference<RandomBilling> client_billing = new AtomicReference<>();
+                AtomicReference<RandomRequestBid> request_bid = new AtomicReference<>();
+
+                // find client billing information
+                randomClients.forEach(randomClient -> { if (randomClient.client_id == request.client_id) client_user_id.set(randomClient.user_id); });
+                randomBillings.forEach(randomBilling -> { if (randomBilling.user_id == client_user_id.get()) client_billing.set(randomBilling); });
+                randomRequestBids.forEach(randomRequestBid -> { if (randomRequestBid.request_id == request.request_id) request_bid.set(randomRequestBid); });
+
+                RandomTransaction outgoing_transaction = null;
+                if (request_bid.get() != null) {
+                    // generate outgoing transaction
+                    outgoing_transaction = RandomTransaction.generate(client_billing.get(), request_bid.get());
+                    randomTransactions.add(outgoing_transaction);
+                }
             }
         });
-    }
-
-    // based of number of completed requests
-    private void GenerateReviews() {
-
     }
 }

@@ -7,8 +7,8 @@
     <list default="true" id="3a6f90a5-733a-4c4d-b3f3-7590ee24b009" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomUserQuestion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomUserQuestion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/service_request.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/service_request.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Types/Service/RandomTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/Service/RandomTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomBilling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomBilling.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,5 +45,15 @@
       <updated>1684200615941</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
