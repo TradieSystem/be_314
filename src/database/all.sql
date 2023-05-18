@@ -358,24 +358,18 @@ COMMIT;
 -- From: 330_insert_request_status.sql 
 INSERT INTO request_status (status_name) values ('New');
 
-INSERT INTO request_status (status_name) values ('Pending Acceptance');
-
 INSERT INTO request_status (status_name) values ('Pending Completion');
 
 INSERT INTO request_status (status_name) values ('Complete');
 
 INSERT INTO request_status (status_name) values ('Archived');
 
+INSERT INTO request_status (status_name) values ('Pending Acceptance');
+
 COMMIT;  
   
 -- ---------------------------- 
 -- From: 340_insert_bid_status.sql 
-INSERT INTO bid_status (status_name) values ('Active');
-
-INSERT INTO bid_status (status_name) values ('Accepted');
-
-INSERT INTO bid_status (status_name) values ('Rejected');
-
 INSERT INTO bid_status (status_name) VALUES ('Pending');
 
 INSERT INTO bid_status (status_name) VALUES ('Approved');

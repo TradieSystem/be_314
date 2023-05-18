@@ -8,3 +8,4 @@ WORKDIR /src/database
 
 COPY /src/database .
 ADD /src/database/all.sql /docker-entrypoint-initdb.d
+ADD data.sql /docker-entrypoint-initdb.d
