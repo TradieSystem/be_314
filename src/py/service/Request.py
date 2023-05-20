@@ -21,7 +21,6 @@ from util.handling.errors.database.DatabaseConnectionError import DatabaseConnec
 from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
 from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
 from util.handling.errors.database.FailedToUpdateDatabaseObject import FailedToUpdateDatabaseObject
-from util.handling.errors.database.NoDatabaseObjectFound import NoDatabaseObjectFound
 
 
 @dataclass
@@ -222,7 +221,7 @@ class Request:
         return requests
 
     @staticmethod
-    def get_by_postcode(postcode: int) -> ['Request']:
+    def get_available_request(postcode: int) -> ['Request']:
         # create database session
         database = Database.database_handler(DatabaseLookups.User)
 
@@ -236,6 +235,7 @@ class Request:
         # create query for database connection
         database.select(('request_id',), 'request')
         database.where('postcode = %s', postcode)
+        database.ampersand('request_status_id = %s', '1')  # request status 1 is new
 
         # try to run query
         results = database.run()

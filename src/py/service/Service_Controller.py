@@ -123,7 +123,8 @@ class Service_Controller:
         return Result_Handler.no_status_code(requests)
 
     def professional_get_available_request(self):
-        requests = Request.get_by_postcode(self.__context.get('postcode'))
+        requests = Request.get_available_request(self.__context.get('postcode'))
+
 
         return Result_Handler.no_status_code(requests)
 
