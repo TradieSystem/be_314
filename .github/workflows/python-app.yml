@@ -23,6 +23,10 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: "3.9"
+    - name: Build Docker Image
+      run: |
+        docker build -t csit314-mysql-image:0.1 .
+        docker run -p 3306:3306 --name csit314-mysql-container csit314-mysql-image:0.1 mysqld --sql-mode=""
     - name: Install dependencies
       working-directory: ./src/py
       run: |
