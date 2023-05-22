@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../data_generation/src/main/java/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/DataGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RandomRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../data_generation/src/main/java/Types/Service/RandomRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/zzztest_user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +44,7 @@
       <recent name="D:\Data\User Data\Documents\Documentation\Studies\University\CSIT314\Group Project\Repos\be_314\src\py\service" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_packager.TestPackager.test_request_packing">
+  <component name="RunManager">
     <configuration name="Python tests for test_packager.TestPackager.test_request_packing" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,20 +87,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_request.MyTestCase.test_get_request_postcode" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="py" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_request.MyTestCase.test_get_request_postcode&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests for test_request.MyTestCase.test_update_request" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,13 +101,27 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for test.zzztest_user.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test.zzztest_user.MyTestCase&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for test.zzztest_user.MyTestCase" />
         <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_update_request" />
         <item itemvalue="Python tests.Python tests for test_packager.TestPackager.test_request_packing" />
         <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_request" />
         <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_by_client_id" />
-        <item itemvalue="Python tests.Python tests for test_request.MyTestCase.test_get_request_postcode" />
       </list>
     </recent_temporary>
   </component>
