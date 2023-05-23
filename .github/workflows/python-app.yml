@@ -23,6 +23,9 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
         ports:
           - 3306
+        volumes:
+          - "./src/database/all.sql:/docker-entrypoint-initdb.d/1.sql"
+          - "./data.sql:/docker-entrypoint-initdb.d/2.sql"          
     
     steps:
     - uses: actions/checkout@v3
