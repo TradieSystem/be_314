@@ -24,9 +24,7 @@ jobs:
         ports:
           - 3306:3306
         volumes:
-          - ./src/database/all.sql:/docker-entrypoint-initdb.d/1.sql
-          - ./data.sql:/docker-entrypoint-initdb.d/2.sql          
-    
+          - ./src/database/all.sql:/docker-entrypoint-initdb.d/all.sql   
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
