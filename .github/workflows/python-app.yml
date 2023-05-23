@@ -12,26 +12,19 @@ on:
 permissions:
   contents: read
 
-jobs:
-  compile:
-    name: Build Docker Image
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      
-      - name: Build Docker Container
-        uses: docker://mysql:latest
-        with:
-          args: >-
-            -v ${{ github.workspace }}:/var/www
-            mysql -uroot -proot < src/database/all.sql
-      
+jobs: 
   build:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+    - name: Build Docker Container
+      uses: docker://mysql:latest
+      with:
+        args: >-
+          -v ${{ github.workspace }}:/var/www
+          mysql -uroot -proot < src/database/all.sql    
+    
     - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
