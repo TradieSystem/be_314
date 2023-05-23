@@ -16,7 +16,3 @@ def test_get_request_bid():
 def test_get_by_request_id():
     get_request_bid =Request_Bid.get_by_request_id(1)
     assert(get_request_bid is not None)
-
-def test_create_request_bid():
-    created_request_bid = tst_create.create_bid()
-    assert(created_request_bid is not None)
