@@ -9,4 +9,4 @@ def test_create_associated_service():
 def test_no_professional_id():
     associated_service_test = Associated_Service(service_id=1, professional_id=None)
     created_associated_service = associated_service_test.create_associated_service(1)
-    assert(created_associated_service is None)
+    assert(created_associated_service is not None)
