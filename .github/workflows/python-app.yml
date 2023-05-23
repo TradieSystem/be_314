@@ -42,8 +42,8 @@ jobs:
     - name: Load MySQL
       working-directory: ./src/database
       run: |
-        mysql --host 127.0.0.1 --port 3306 -uroot -p${{ env.DB_PASSWORD }} < all.sql
-        mysql --host 127.0.0.1 --port 3306 -uroot -p${{ env.DB_PASSWORD }} < ./../../data.sql       
+        mysql --host 127.0.0.1 --port 3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} < all.sql
+        mysql --host 127.0.0.1 --port 3306 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} < ./../../data.sql       
     - name: Test with pytest
       working-directory: ./src/py/test
       run: |
