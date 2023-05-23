@@ -46,3 +46,7 @@ jobs:
       working-directory: ./src/py/test
       run: |
         pytest test_user.py
+        pytest test_associated_service.py        
+        pytest test_request.py
+        pytest test_request_bid.py
+        pytest test_review.py
