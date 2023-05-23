@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/test_associated_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_request_status.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_review.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_review_create.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_transaction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_transaction_create.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/Associated_Service.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/Associated_Service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_request_bid.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_request_bid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_request_bid_create.json" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_request_bid_create.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_user_controller.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +49,7 @@
       <recent name="D:\Data\User Data\Documents\Documentation\Studies\University\CSIT314\Group Project\Repos\be_314\src\py\service" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for zzztest_user.MyTestCase">
+  <component name="RunManager">
     <configuration name="Python tests for test_packager.TestPackager.test_request_packing" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />

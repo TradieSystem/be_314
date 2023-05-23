@@ -14,9 +14,6 @@ with open('test_user_update.json') as tst_usr:
     print(tst_update)
 
 
-# global user_id for rest of tests
-
-global_user_id = -1
 def test_get_user():
     get_user = User.get_user(1)
     assert(get_user is not None)
