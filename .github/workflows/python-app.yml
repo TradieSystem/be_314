@@ -20,19 +20,16 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-          MYSQL_ROOT_PASSWORD: ext50n123
+          DB_USER: root
+          DB_PASSWORD: ext50n123
         ports:
-          - 3306:3306
-        volumes:
-          - ./src/database/all.sql:/docker-entrypoint-initdb.d      
-          
+          - 3306:3306 
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
         python-version: "3.9"
-        
     - name: Install dependencies
       working-directory: ./src/py
       run: |
@@ -40,11 +37,14 @@ jobs:
         python -m pip install -e ./
         python -m pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
     - name: Wait for MYSQL
-      run: sleep 30s
+      run: sleep 10s
       shell: bash
-    
+    - name: Load MySQL
+      working-directory: ./src/database
+      run: |
+        mysql --host 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} < all.sql
+        mysql --host 127.0.0.1 --port 3306 -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }} < ./../../data.sql       
     - name: Test with pytest
       working-directory: ./src/py/test
       run: |
