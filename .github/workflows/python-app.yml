@@ -38,7 +38,11 @@ jobs:
         python -m pip install -e ./
         python -m pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
+
+    - name: Wait for MYSQL
+      run: sleep 30s
+      shell: bash
+    
     - name: Test with pytest
       working-directory: ./src/py/test
       run: |
