@@ -24,26 +24,13 @@ public class RandomAssociatedService {
     public RandomAssociatedService() {
     }
     
-    public static RandomAssociatedService generate(RandomProfessional randomProfessional, List<Service> availableServices) {
-        /*
-        RandomAssociatedService entity = new RandomAssociatedService();
-        entity.provided_service_id = CURRENT_ID++;
-        Faker faker = new Faker();
-        int pos =  faker.random().nextInt(1,availableServices.size());
-        Service sq = availableServices.get(pos);
-        availableServices.remove(pos);
-
-        entity.service_id=sq.id;
-        entity.professional_id = randomProfessional.professional_id;
-        return entity;
-         */
-
+    public static RandomAssociatedService generate(RandomProfessional randomProfessional, ArrayList<Integer> availableServices) {
         CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
 
         Schema<Object, ?> associatedServiceSchema = Schema.of(
                 Field.field("provided_service_id", () -> RandomUserQuestion.CURRENT_ID++),
-                Field.field("service_id", () -> faker.random().nextInt(1, availableServices.size())),
+                Field.field("service_id", () -> faker.random().nextInt(1, 4)),
                 Field.field("professional_id", () -> randomProfessional.professional_id)
         );
 

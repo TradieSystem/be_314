@@ -1,28 +1,64 @@
-import unittest
+import pytest
+
+from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
+from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
+from util.packager.Encoder import Encoder
+from util.packager.Decoder import Decoder
 from user.User import User
-from user.Billing import Billing
-from user.Address import Address
-from user.Client import Client
-from user.Professional import Professional
+
+#  read in test data
+with open('test_user_create.json') as tst_usr:
+    read_in = tst_usr.read()
+    tst_create = Decoder(read_in).deserialize()
+    print(tst_create)
+
+with open('test_user_update.json') as tst_usr:
+    read_in = tst_usr.read()
+    tst_update = Decoder(read_in).deserialize()
+    print(tst_update)
 
 
-class MyTestCase(unittest.TestCase):
-    def test_user_create(self):
-        ccout = Billing(billing_id=-1, name='Outgoing', card_number='4444 4444 4444 4444', expiry_date='10/2024',
-                        ccv='123', billing_type='Out')
-        ccin = Billing(billing_id=-1, name='In', card_number='1111 1111 1111 1111', expiry_date='10/2025',
-                       ccv='321', billing_type='In')
-        address = Address(address_id=-1, street_number='10', street_name='Biggie Street', suburb='Liverpool',
-                          postcode='2170')
-        client = Client(client_id=None, user_id=82, subscription_id=1)
-        professional = Professional(subscription_id=1, CCin=ccout)
-        usr = User(first_name='Jason', last_name='Statham', email_address='jstatham@outlook.com',
-                   mobile='9090909090', password='password1', ccout=ccout, address=address, client=client,
-                   professional=professional)
+# global user_id for rest of tests
 
-        creation = usr.create_user()
-        print(creation)
+global_user_id = -1
+def test_get_user():
+    get_user = User.get_user(1)
+    assert(get_user is not None)
 
+def test_create_user():
+    created_user = tst_create.create_user()
+    assert(created_user.user_id != -1)  # i.e. user created no issues
 
-if __name__ == '__main__':
-    unittest.main()
+#  test of non nested values
+def test_update_user():
+    to_update = User.get_user(1)
+    original_mobile = to_update.mobile
+    to_update.mobile = '9999999999'
+    updated_user = to_update.update_user()
+    update_mobile = updated_user.mobile
+    assert(original_mobile != update_mobile)
+
+# test should fail as user already exists
+def test_duplicate_user():
+    try:
+        create_user = tst_create.create_user()
+        assert False
+    except FailedToCreateDatabaseObject as ftcdo:
+        assert True
+
+# should return None
+def test_update_user_not_exists():
+    to_update = tst_update
+    to_update.user_id = 999
+    updated_user = to_update.update_user()
+    assert(updated_user is None)
+
+# should throw error as user should not be created without security questions
+def test_empty_security_questions():
+    try:
+        to_create = tst_create.create_user()
+        to_create.security_questions = None
+        created_user = to_create.create_user()
+        assert False
+    except FailedToCreateDatabaseObject as e:
+        assert True

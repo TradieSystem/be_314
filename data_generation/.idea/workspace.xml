@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a6f90a5-733a-4c4d-b3f3-7590ee24b009" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DataGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/Service/RandomTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/Service/RandomTransaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomBilling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomBilling.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SqlGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SqlGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Types/Service/RandomAssociatedService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/Service/RandomAssociatedService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Types/User/RandomAddress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Types/User/RandomAddress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/py/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../src/py/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/py/test/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/../src/py/test/test_user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -28,8 +28,8 @@ public class DataGenerator {
     private final ArrayList<RandomRequest> randomRequests;
     private final ArrayList<RandomRequestBid> randomRequestBids;
     private final ArrayList<RandomReview> randomReviews;
-    private int numberOfUsers;
-    private int numberOfRequests;
+    private final int numberOfUsers;
+    private final int numberOfRequests;
 
     public DataGenerator(int numberOfUsers, int numberOfRequests) {
         this.randomUsers = new ArrayList<>();
@@ -53,45 +53,7 @@ public class DataGenerator {
     public void GenerateData() {
         this.GenerateUsers(numberOfUsers);
         this.GenerateRequests(numberOfRequests);
-
-        SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, randomUsers);
-        SqlGenerator<RandomBilling> billings = new SqlGenerator<>(RandomBilling.class, randomBillings);
-        SqlGenerator<RandomUserQuestion> questions = new SqlGenerator<>(RandomUserQuestion.class, randomUserQuestions);
-        SqlGenerator<RandomAuthorisation> authorisations = new SqlGenerator<>(RandomAuthorisation.class, randomAuthorisations);
-        SqlGenerator<RandomSession> sessions = new SqlGenerator<>(RandomSession.class, randomSessions);
-        SqlGenerator<RandomAddress> addresses = new SqlGenerator<>(RandomAddress.class, randomAddresses);
-        SqlGenerator<RandomClient> clients = new SqlGenerator<>(RandomClient.class, randomClients);
-        SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, randomProfessionals);
-        SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, randomRequests);
-        SqlGenerator<RandomRequestBid> requestBids = new SqlGenerator<>(RandomRequestBid.class, randomRequestBids);
-        SqlGenerator<RandomReview> reviews = new SqlGenerator<>(RandomReview.class, randomReviews);
-        SqlGenerator<RandomTransaction> transactions = new SqlGenerator<>(RandomTransaction.class, randomTransactions);
-
-        String file = "USE Project;\n";
-        file += users.generateScript();
-        file += billings.generateScript();
-        file += questions.generateScript();
-        file += authorisations.generateScript();
-        file += sessions.generateScript();
-        file += addresses.generateScript();
-        file += clients.generateScript();
-        file += professionals.generateScript();
-        file += requests.generateScript();
-        file += requestBids.generateScript();
-        file += reviews.generateScript();
-        file += transactions.generateScript();
-
-        // replace 'null' with null
-        file = file.replace("'null'", "null");
-
-        // create sql file
-        try {
-            FileWriter outFile = new FileWriter("src\\..\\..\\data.sql");
-            outFile.write(file);
-            outFile.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        SqlGenerator.CreateQuery(this);
     }
 
     // can remove, but for readability might be good to keep
@@ -119,10 +81,15 @@ public class DataGenerator {
                 }
                 
                 // Assign 1 to 4 services that the professional provides...
-                List<Service> serviceList = Arrays.asList(Service.values());
+                ArrayList<Integer> associatedServices = new ArrayList<Integer>();
                 int numServices = RandomAssociatedService.getRandomInt(1,4);
-                for (int j = 0; j< numServices; j++ ) {
-                    randomAssociatedServices.add(RandomAssociatedService.generate(professional, serviceList));
+                while (associatedServices.size() != numServices) {
+                    var randomAssociatedService = RandomAssociatedService.generate(professional, associatedServices);
+                    if (!associatedServices.contains(randomAssociatedService.service_id)) {
+                        randomAssociatedServices.add(randomAssociatedService);
+                        associatedServices.add(randomAssociatedService.service_id);
+                    }
+
                 }
                 randomBillings.add(RandomBilling.generate(user, false));
                 
@@ -235,5 +202,51 @@ public class DataGenerator {
                 }
             }
         });
+    }
+
+    public ArrayList<RandomUser> getRandomUsers() {
+        return randomUsers;
+    }
+    public ArrayList<RandomAddress> getRandomAddresses() {
+        return randomAddresses;
+    }
+    public ArrayList<RandomBilling> getRandomBillings() {
+        return randomBillings;
+    }
+    public ArrayList<RandomClient> getRandomClients() {
+        return randomClients;
+    }
+    public ArrayList<RandomProfessional> getRandomProfessionals() {
+        return randomProfessionals;
+    }
+    public ArrayList<RandomAssociatedService> getRandomAssociatedServices() {
+        return randomAssociatedServices;
+    }
+    public ArrayList<RandomUserQuestion> getRandomUserQuestions() {
+        return randomUserQuestions;
+    }
+    public ArrayList<RandomAuthorisation> getRandomAuthorisations() {
+        return randomAuthorisations;
+    }
+    public ArrayList<RandomSession> getRandomSessions() {
+        return randomSessions;
+    }
+    public ArrayList<RandomTransaction> getRandomTransactions() {
+        return randomTransactions;
+    }
+    public ArrayList<RandomRequest> getRandomRequests() {
+        return randomRequests;
+    }
+    public ArrayList<RandomRequestBid> getRandomRequestBids() {
+        return randomRequestBids;
+    }
+    public ArrayList<RandomReview> getRandomReviews() {
+        return randomReviews;
+    }
+    public int getNumberOfUsers() {
+        return numberOfUsers;
+    }
+    public int getNumberOfRequests() {
+        return numberOfRequests;
     }
 }
