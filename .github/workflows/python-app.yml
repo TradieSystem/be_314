@@ -15,16 +15,17 @@ permissions:
 jobs: 
   build:
     runs-on: ubuntu-latest
-
+    
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306
+    
     steps:
     - uses: actions/checkout@v3
-    - name: Build Docker Container
-      uses: docker://mysql:latest
-      with:
-        args: >-
-          -v ${{ github.workspace }}:/var/www
-          mysql -uroot -proot < /src/database/all.sql    
-    
     - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
