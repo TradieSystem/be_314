@@ -86,6 +86,11 @@ class User:
             self.delete_user()
             raise fcdo
 
+        # if the questions are empty account should not be created
+        if self.security_questions is None:
+            self.delete_user()
+            raise FailedToCreateDatabaseObject(table='user', query='', database_object=self)
+
         # due to multiple questions, need to loop and call
         security_questions = []
         for security_question in self.security_questions:
@@ -188,7 +193,7 @@ class User:
         database.clear()
         database.disconnect()
 
-        return self.get_user(self.user_id)
+        return User.get_user(self.user_id)
 
     # delete entire user object
     def delete_user(self) -> None:

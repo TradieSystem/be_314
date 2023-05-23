@@ -1,3 +1,7 @@
+import pytest
+
+from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
+from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
 from util.packager.Encoder import Encoder
 from util.packager.Decoder import Decoder
 from user.User import User
@@ -31,4 +35,30 @@ def test_update_user():
     original_mobile = to_update.mobile
     to_update.mobile = '9999999999'
     updated_user = to_update.update_user()
-    assert(original_mobile != updated_user.mobile)
+    update_mobile = updated_user.mobile
+    assert(original_mobile != update_mobile)
+
+# test should fail as user already exists
+def test_duplicate_user():
+    try:
+        create_user = tst_create.create_user()
+        assert False
+    except FailedToCreateDatabaseObject as ftcdo:
+        assert True
+
+# should return None
+def test_update_user_not_exists():
+    to_update = tst_update
+    to_update.user_id = 999
+    updated_user = to_update.update_user()
+    assert(updated_user is None)
+
+# should throw error as user should not be created without security questions
+def test_empty_security_questions():
+    try:
+        to_create = tst_create.create_user()
+        to_create.security_questions = None
+        created_user = to_create.create_user()
+        assert False
+    except FailedToCreateDatabaseObject as e:
+        assert True
