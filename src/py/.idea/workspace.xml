@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/zzztest_user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_user.py" afterDir="false" />
     </list>
@@ -15,8 +14,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Unit Test" />
-        <option value="Python Script" />
         <option value="Setup Script" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -44,7 +43,7 @@
       <recent name="D:\Data\User Data\Documents\Documentation\Studies\University\CSIT314\Group Project\Repos\be_314\src\py\service" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests for test.zzztest_user.MyTestCase">
     <configuration name="Python tests for test_packager.TestPackager.test_request_packing" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="py" />
       <option name="INTERPRETER_OPTIONS" value="" />
