@@ -23,7 +23,7 @@ jobs:
       with:
         args: >-
           -v ${{ github.workspace }}:/var/www
-          mysql -uroot -proot < src/database/all.sql    
+          mysql -uroot -proot < /src/database/all.sql    
     
     - name: Set up Python 3.9
       uses: actions/setup-python@v3
