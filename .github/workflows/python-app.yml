@@ -22,6 +22,7 @@ jobs:
         env:
           DB_USER: root
           DB_PASSWORD: ext50n123
+          MYSQL_ROOT_PASSWORD: ext50n123
         ports:
           - 3306:3306 
     steps:
