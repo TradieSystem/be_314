@@ -27,6 +27,10 @@ class Associated_Service:
         if self.professional_id is None:
             self.professional_id = professional_id
 
+        # if professional id provided is None and self is None
+        if self.professional_id is None and professional_id is None:
+            raise AttributeError('No professional_id provided')
+
         # attempt to create address row
         database.clear()
         database.insert(self, 'associated_service', ('provided_service_id',))
@@ -41,7 +45,7 @@ class Associated_Service:
             # constructing query to return already created user
             database.clear()
             database.select(('provided_service_id', ), 'associated_service')
-            database.where('professional_id = %s', self.user_id)
+            database.where('professional_id = %s', self.professional_id)
             self.provided_service_id = database.run()[0][0]
 
         # clear database tool

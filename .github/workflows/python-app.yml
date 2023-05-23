@@ -36,15 +36,17 @@ jobs:
         python -m pip install -e ./
         python -m pip install pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Wait for MYSQL
-      run: sleep 10s
-      shell: bash
     - name: Load MySQL
       working-directory: ./src/database
       run: |
         mysql --host 127.0.0.1 --port 3306 -uroot -pext50n123 < all.sql
-        mysql --host 127.0.0.1 --port 3306 -uroot -pext50n123 < ./../../data.sql       
+        mysql --host 127.0.0.1 --port 3306 -uroot -pext50n123 < ./../../data.sql
+        mysql -e 'SELECT * FROM Project.user' --host 127.0.0.1 --port 3306 -uroot -pext50n123
     - name: Test with pytest
       working-directory: ./src/py/test
       run: |
         pytest test_user.py
+        pytest test_associated_service.py        
+        pytest test_request.py
+        pytest test_request_bid.py
+        pytest test_review.py
