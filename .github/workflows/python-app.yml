@@ -24,7 +24,7 @@ jobs:
         ports:
           - 3306:3306
         volumes:
-              - ./src/database/all.sql:/docker-entrypoint-initdb.d      
+          - ./src/database/all.sql:/docker-entrypoint-initdb.d      
           
     steps:
     - uses: actions/checkout@v3
