@@ -1,8 +1,4 @@
-import pytest
-
-from util.handling.errors.database.DatabaseObjectAlreadyExists import DatabaseObjectAlreadyExists
 from util.handling.errors.database.FailedToCreateDatabaseObject import FailedToCreateDatabaseObject
-from util.packager.Encoder import Encoder
 from util.packager.Decoder import Decoder
 from user.User import User
 
