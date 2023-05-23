@@ -290,7 +290,12 @@ class Request:
 
         # check if professional_id and client_id exists
         professional_id = Professional.get_professional(obj.get('professionalID')).professional_id if obj.get('professionalID') is not None else None
-        client_id = User.get_user(obj.get('clientID')).client.client_id if obj.get('clientID') is not None else None
+
+        if obj.get('clientID') is not None:
+            client_id = User.get_user(obj.get('clientID')).client.client_id
+            print("Client_ID: {}".format(client_id))
+        else:
+            client_id = None
 
         # parse date time
         request_date = datetime.strptime(obj.get('requestDate'), '%m/%d/%Y') if obj.get('requestDate') is not None else None

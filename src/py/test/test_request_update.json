@@ -1,0 +1,9 @@
+{
+    "requestID": 1,
+    "requestDate": "12/24/2023",
+    "serviceType": "Plumbing",
+    "postcode": 2602,
+    "requestStatus": "Pending Completion",
+    "jobDescription": "Testing Application POST",
+    "clientID": 15
+}
