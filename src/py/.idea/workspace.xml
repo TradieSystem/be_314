@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/test_request_bid.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_request_bid_create.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test_request_bid_update.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_authorisation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_database.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_json.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_packager.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/zzztest_request.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/User.py" afterDir="false" />
-    </list>
+    <list default="true" id="a5225606-bd9d-48d2-a05d-2a6ffdebdba2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
