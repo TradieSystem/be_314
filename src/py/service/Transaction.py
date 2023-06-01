@@ -20,7 +20,7 @@ class Transaction:
     transaction_id: int
     cost: float = None
     transaction_date: datetime = None
-    transaction_status: str = None
+    transaction_status_id: int = None
     user_id: int = None
     billing_type_id: int = None
     billing_id: int = None
