@@ -1,0 +1,9 @@
+{
+  "transaction_id": -1,
+  "cost": "158",
+  "transaction_date": "10/20/2021",
+  "transaction_status_id": 1,
+  "user_id": 1,
+  "billing_type_id": 1,
+  "billing_id": 1
+}
