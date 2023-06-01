@@ -355,7 +355,7 @@ class User:
                 "address": obj.address,
                 "client": None if obj.client is None else obj.client,
                 "professional": None if obj.professional is None else obj.professional,
-                #"securityQuestions": obj.security_questions
+                "securityQuestions": obj.security_questions
             }
             return remap
 
