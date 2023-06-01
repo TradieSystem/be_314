@@ -1,5 +1,8 @@
-import Types.User.RandomClient;
+import Types.Service.*;
+import Types.User.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 import java.lang.reflect.Modifier;
@@ -71,5 +74,48 @@ public class SqlGenerator<T> {
         }
 
         return String.format("INSERT INTO %s (%s) VALUES (%s)", table, columns, values);
+    }
+
+    public static void CreateQuery(DataGenerator dataGenerator) {
+        SqlGenerator<RandomUser> users = new SqlGenerator<>(RandomUser.class, dataGenerator.getRandomUsers());
+        SqlGenerator<RandomBilling> billings = new SqlGenerator<>(RandomBilling.class, dataGenerator.getRandomBillings());
+        SqlGenerator<RandomUserQuestion> questions = new SqlGenerator<>(RandomUserQuestion.class, dataGenerator.getRandomUserQuestions());
+        SqlGenerator<RandomAssociatedService> associatedServices = new SqlGenerator<>(RandomAssociatedService.class, dataGenerator.getRandomAssociatedServices());
+        SqlGenerator<RandomAuthorisation> authorisations = new SqlGenerator<>(RandomAuthorisation.class, dataGenerator.getRandomAuthorisations());
+        SqlGenerator<RandomSession> sessions = new SqlGenerator<>(RandomSession.class, dataGenerator.getRandomSessions());
+        SqlGenerator<RandomAddress> addresses = new SqlGenerator<>(RandomAddress.class, dataGenerator.getRandomAddresses());
+        SqlGenerator<RandomClient> clients = new SqlGenerator<>(RandomClient.class, dataGenerator.getRandomClients());
+        SqlGenerator<RandomProfessional> professionals = new SqlGenerator<>(RandomProfessional.class, dataGenerator.getRandomProfessionals());
+        SqlGenerator<RandomRequest> requests = new SqlGenerator<>(RandomRequest.class, dataGenerator.getRandomRequests());
+        SqlGenerator<RandomRequestBid> requestBids = new SqlGenerator<>(RandomRequestBid.class, dataGenerator.getRandomRequestBids());
+        SqlGenerator<RandomReview> reviews = new SqlGenerator<>(RandomReview.class, dataGenerator.getRandomReviews());
+        SqlGenerator<RandomTransaction> transactions = new SqlGenerator<>(RandomTransaction.class, dataGenerator.getRandomTransactions());
+
+        String file = "USE Project;\n";
+        file += users.generateScript();
+        file += billings.generateScript();
+        file += questions.generateScript();
+        file += authorisations.generateScript();
+        file += sessions.generateScript();
+        file += addresses.generateScript();
+        file += clients.generateScript();
+        file += professionals.generateScript();
+        file += associatedServices.generateScript();
+        file += requests.generateScript();
+        file += requestBids.generateScript();
+        file += reviews.generateScript();
+        file += transactions.generateScript();
+
+        // replace 'null' with null
+        file = file.replace("'null'", "null");
+
+        // create sql file
+        try {
+            FileWriter outFile = new FileWriter("src\\..\\..\\data.sql");
+            outFile.write(file);
+            outFile.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

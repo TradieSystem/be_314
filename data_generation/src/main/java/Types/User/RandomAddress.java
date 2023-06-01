@@ -20,19 +20,6 @@ public class RandomAddress {
     public RandomAddress() {}
 
     public static RandomAddress generate(int user_id) {
-        /*
-        RandomAddress entity = new RandomAddress(user_id);
-        entity.address_id = CURRENT_ID++;
-        Faker faker = new Faker();
-        entity.street_number = faker.random().nextInt(1,200);
-        entity.street_name = faker.address().streetName();
-        int pos = faker.random().nextInt(0,Suburb.values().length-1);
-        Suburb suburb = Suburb.values()[pos];
-        entity.suburb = suburb.suburbName;
-        entity.postcode = suburb.postcode;
-        return entity;
-         */
-
         CustomFaker faker = new CustomFaker();
         JavaObjectTransformer transfomer = new JavaObjectTransformer();
 
@@ -41,7 +28,7 @@ public class RandomAddress {
         Schema<Object, ?> addressSchema = Schema.of(
                 Field.field("address_id", () -> RandomAddress.CURRENT_ID++),
                 Field.field("street_number", () -> faker.random().nextInt(1,200)),
-                Field.field("street_name", () -> faker.address().streetName().replace("\'","")),
+                Field.field("street_name", () -> faker.address().streetName().replace("'","")),
                 Field.field("suburb", () ->  randomSuburb.suburb),
                 Field.field("postcode", () -> randomSuburb.postcode),
                 Field.field("user_id", () -> user_id)

@@ -18,7 +18,7 @@ class Billing:
     card_number: str = None
     expiry_date: str = None
     ccv: str = None
-    billing_type: str = None
+    billing_type_id: int = None
     user_id: int = None
 
     def create_billing(self, user_id: int) -> 'Billing':
@@ -130,7 +130,7 @@ class Billing:
                 "CCNumber": obj.card_number,
                 "expiryDate": obj.expiry_date,
                 "CCV": obj.ccv,
-                "billingType": obj.billing_type
+                "billingType": 'Out' if obj.billing_type_id == 1 else 'In'
             }
             return remap
 
@@ -138,5 +138,8 @@ class Billing:
 
     @staticmethod
     def FromAPI(obj):
+        if obj.get('billingType') is not None:
+            billing_type_id = 1 if obj.get('billingType') == 'Out' else 2
+
         return Billing(billing_id=obj.get('billing_id'), name=obj.get('CCName'), card_number=obj.get('CCNumber'),
-                       expiry_date=obj.get('expiryDate'), ccv=obj.get('CCV'), billing_type=obj.get('billingType'))
+                       expiry_date=obj.get('expiryDate'), ccv=obj.get('CCV'), billing_type_id=billing_type_id)

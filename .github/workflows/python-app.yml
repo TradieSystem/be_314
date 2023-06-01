@@ -1,0 +1,50 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main", "Automations" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: ext50n123
+        ports:
+          - 3306:3306 
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9"
+    - name: Install dependencies
+      working-directory: ./src/py
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install -e ./
+        python -m pip install pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Load MySQL
+      working-directory: ./src/database
+      run: |
+        mysql --host 127.0.0.1 --port 3306 -uroot -pext50n123 < all.sql
+        mysql --host 127.0.0.1 --port 3306 -uroot -pext50n123 < ./../../data.sql
+        mysql -e 'SELECT * FROM Project.user' --host 127.0.0.1 --port 3306 -uroot -pext50n123
+    - name: Test with pytest
+      working-directory: ./src/py/test
+      run: |
+        pytest test_user.py
+        pytest test_associated_service.py        
+        pytest test_request.py

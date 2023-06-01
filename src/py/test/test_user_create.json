@@ -1,0 +1,50 @@
+{
+    "user_id": -1,
+    "firstName": "be_professional",
+    "lastName": "one",
+    "email": "be_professional1@outlook.com",
+    "password": "TheBest123!",
+    "mobile": "0412345678",
+    "address": {
+        "streetNumber": "1",
+        "streetName": "G.O.A.T Street",
+        "suburb": "Champions League",
+        "postcode": "1111"
+    },
+    "CCOut": {
+        "CCName": "Outgoing",
+        "CCNumber": "1234 5678 9111 2134",
+        "expiryDate": "11/2024",
+        "CCV": "123",
+        "billingType": "Out"
+    },
+    "client": {
+        "membershipType": "Subscription"
+    },
+    "professional": {
+        "services": [
+            "Oven Repairs"
+        ],        
+        "CCin": {
+            "CCName": "Incoming",
+            "CCNumber": "4444 4444 4444 4444",
+            "expiryDate": "11/2025",
+            "CCV": "333",
+            "billingType": "In"
+        }
+    },    
+    "securityQuestions": [
+        {
+            "securityQuestion": "What was your first car?",
+            "answer": "G.O.A.T"
+        },
+        {
+            "securityQuestion": "What was the name of the first street you lived on?",
+            "answer": "G.O.A.T"
+        },
+        {
+            "securityQuestion": "What was the name of your first pet?",
+            "answer": "G.O.A.T"
+        }
+    ]
+}
